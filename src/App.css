@@ -1,3 +1,21 @@
+/* 1. `@import` MUST come first */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+
+/* 2. All your regular styles go BELOW it */
+:root {
+  --ink: #111111;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+/* ... rest of your code */
+
+
+
+
+
+
 .counter {
   font-size: 16px;
   padding: 5px 10px;
