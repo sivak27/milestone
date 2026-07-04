@@ -1,9 +1,9 @@
 import React from 'react';
 import HeroSection from './components/HeroSection.jsx';
-import Philosophy from "./components/ Philosophy";
+import Philosophy from "./components/Philosophy";
 import Service from "./components/Service";
-import Journey from "./components/journey";
-import Process from "./components/process";
+import Journey from "./components/Journey";
+import Process from "./components/Process";
 import Growth from "./components/Growth.jsx";
 import Compare from "./components/Compare";
 import Testimonial from "./components/Testimonials";

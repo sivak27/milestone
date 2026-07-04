@@ -1,5 +1,5 @@
 import React from 'react';
-import './journey.css';
+import './Journey.css';
 
 const journeySteps = [
   {
