@@ -1,6 +1,6 @@
 import React from 'react';
 import HeroSection from './components/HeroSection.jsx';
-import Philosophy from "./components/philosophy";
+import Philosophy from "./components/ Philosophy";
 import Service from "./components/Service";
 import Journey from "./components/journey";
 import Process from "./components/process";
