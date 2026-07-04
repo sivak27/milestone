@@ -52,3 +52,66 @@ body {
 .animate-marquee {
   animation: continuous-marquee 35s linear infinite;
 }
+/* =========================================
+           TABLET & SMALL DESKTOP (Max 1024px)
+           ========================================= */
+        @media (max-width: 1024px) {
+          .app-header {
+            padding: 0 40px !important;
+          }
+          
+          .desktop-nav {
+            display: none !important; 
+          }
+
+          .hero-stage {
+            flex-direction: column !important;
+            padding: 120px 40px 60px 40px !important;
+          }
+
+          .hero-left {
+            width: 100% !important;
+            align-items: center !important;
+            text-align: center !important;
+          }
+
+          .hero-title {
+            align-items: center !important;
+          }
+
+          .hero-right {
+            width: 100% !important;
+            margin-top: 60px !important;
+            transform: scale(0.9);
+          }
+        }
+
+        /* =========================================
+           MOBILE SCREENS (Max 768px)
+           ========================================= */
+        @media (max-width: 768px) {
+          .app-header {
+            padding: 0 20px !important;
+          }
+
+          .hero-stage {
+            padding: 100px 20px 40px 20px !important;
+          }
+
+          .hero-title {
+            font-size: 46px !important;
+          }
+
+          .hero-left p {
+            font-size: 15px !important;
+          }
+
+          .hero-right {
+            transform: scale(0.65) !important; 
+            height: 350px !important;
+          }
+
+          .marquee-container-loop img {
+            height: 120px !important;
+          }
+        }

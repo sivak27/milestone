@@ -6,6 +6,8 @@ import Logo2 from "/src/assets/2.png";
 import Logo3 from "/src/assets/3.png";
 import Logo4 from "/src/assets/4.png";
 import Logo5 from "/src/assets/5.png";
+import "./App.css";
+
 
 function FloatingCard({ styleOverrides = {}, delay = 0, children, parallax = 20, mx, my }) {
   const tx = useTransform(mx, (v) => v * parallax);
@@ -163,9 +165,8 @@ export default function HeroSection() {
           background: "radial-gradient(circle at 60% 40%, #B7E6CE 0%, #DFF4E8 50%, transparent 75%)"
         }}
       />
-
-      {/* HEADER LAYER */}
-      <header 
+{/* HEADER LAYER */}
+      <header className="app-header"
         style={{ 
           position: "fixed",
           top: 0,
@@ -192,7 +193,7 @@ export default function HeroSection() {
           </div>
         </div>
 
-        <nav 
+        <nav className="desktop-nav"
           style={{ 
             position: "absolute",
             left: "50%",
@@ -245,7 +246,7 @@ export default function HeroSection() {
       </header>
 
       {/* STAGE CONTAINER */}
-      <section 
+      <section className="hero-stage"
         ref={containerRef} 
         style={{
           position: "relative",
@@ -261,7 +262,7 @@ export default function HeroSection() {
         }}
       >
         {/* Left Side Content Area */}
-        <motion.div style={{ x: leftX, display: "flex", flexDirection: "column", alignItems: "flex-start", width: "50%", boxSizing: "border-box" }}>
+        <motion.div className="hero-left" style={{ x: leftX, display: "flex", flexDirection: "column", alignItems: "flex-start", width: "50%", boxSizing: "border-box" }}>
           
           <div style={{ display: "inline-flex", alignItems: "center", gap: "8px", backgroundColor: "#edf7ed", border: "1px solid #d2ebd2", padding: "5px 14px", borderRadius: "9999px", fontSize: "10px", fontWeight: "700", color: "#1e5631", marginBottom: "28px", letterSpacing: "0.06em" }}>
             <span style={{ width: "6px", height: "6px", borderRadius: "50%", backgroundColor: "#10b981" }} />
@@ -271,7 +272,7 @@ export default function HeroSection() {
           <div>
             {/* Cleaned up Heading: IDs REMOVED from the internal word lines */}
             <h1 
-              className="raw-font-serif" 
+              className="raw-font-serif hero-title" 
               style={{ 
                 fontSize: "76px", 
                 fontWeight: 400, 
@@ -326,7 +327,7 @@ export default function HeroSection() {
         </motion.div>
 
         {/* Right Side Cards Layer */}
-        <motion.div 
+        <motion.div className="hero-right"
           style={{ x: rightX, position: "relative", width: "45%", height: "540px", display: "flex", alignItems: "center", justifyContent: "center", boxSizing: "border-box" }}
         >
           <div style={{ position: "absolute", inset: 0, display: "grid", placeItems: "center", pointerEvents: "none", zIndex: 0 }}>
