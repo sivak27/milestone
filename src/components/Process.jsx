@@ -1,4 +1,4 @@
-import "./process.css";
+import "./Process.css";
 import { ArrowUpRight } from "lucide-react";
 
 const cases = [
