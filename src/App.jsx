@@ -7,6 +7,7 @@ import Process from "./components/Process.jsx";
 import Growth from "./components/Growth.jsx";
 import Compare from "./components/Compare";
 import Testimonial from "./components/Testimonials";
+import OurTeam from "./components/OurTeam.jsx";
 import Cat  from "./components/Cat";
 import Footer from "./components/Footer";
 
@@ -21,6 +22,7 @@ function App() {
       <Compare />
       <Growth />
       <Testimonial />
+      <OurTeam />
       <Cat />
       <Footer />
     </div>
