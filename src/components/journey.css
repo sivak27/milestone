@@ -1,0 +1,172 @@
+/* Container Reset */
+.journey-section {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 80px 20px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: #fcfcfd;
+  color: #1e293b;
+  overflow: hidden;
+}
+
+/* Soft ambient glow behind the whole section — now spans full width */
+.journey-section::before {
+  content: "";
+  position: absolute;
+  top: -20%;
+  left: -10%;
+  width: 120%;
+  height: 140%;
+  background: radial-gradient(
+    ellipse at center,
+    #dff5e7cc 0%,
+    #dff5e766 40%,
+    transparent 75%
+  );
+  filter: blur(60px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.journey-title {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 500;
+  margin-bottom: 80px;
+  font-family: 'Cormorant Garamond', serif;
+}
+
+/* Timeline Layout */
+.timeline-container {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  padding-bottom: 50px;
+}
+
+/* MATH CHECK: 
+  Text height (160px) + Half circle w/ border (30px) = 190px.
+  This perfectly aligns the SVG's Y=0 (the top peak) to the high circles.
+*/
+.svg-container {
+  position: absolute;
+  top: 190px; 
+  left: 0;
+  width: 100%;
+  height: 100px;
+  z-index: 1;
+}
+
+.dashed-wave {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.nodes-wrapper {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  width: 100%;
+}
+
+.timeline-node {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+}
+
+.node-content {
+  height: 160px;
+  width: 85%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-bottom: 20px;
+}
+
+.node-high {
+  margin-top: 0px;
+}
+
+.node-low {
+  margin-top: 100px;
+}
+
+/* Text Content Styling */
+.node-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 8px 0;
+  font-family: "Cormorant Garamond", serif;
+}
+
+.node-subtitle {
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #64748b;
+  margin: 0 0 12px 0;
+  font-family: "Cormorant Garamond", serif;
+}
+
+.node-description {
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: #64748b;
+  margin: 0;
+  font-family: "Inter", sans-serif;
+}
+
+/* The Numbered Circles */
+.node-circle {
+  width: 48px;
+  height: 48px;
+  background-color: #334155;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 1.1rem;
+  position: relative;
+  z-index: 2;
+  border: 6px solid #fcfcfd;
+  box-sizing: content-box; 
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .nodes-wrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .timeline-node {
+    width: 80%;
+    margin-top: 20px !important;
+    margin-bottom: 40px;
+  }
+
+  .node-content {
+    height: auto;
+    justify-content: center;
+  }
+  
+  .svg-container {
+    display: none;
+  }
+
+  .journey-section::before {
+    width: 140%;
+    left: -20%;
+  }
+}

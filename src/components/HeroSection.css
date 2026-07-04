@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,400&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap');
+
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background-color: #fafdfa;
+  overflow-x: hidden;
+  margin: 0;
+}
+
+.font-serif-display {
+  font-family: 'Cormorant Garamond', serif;
+}
+
+/* Glassmorphism Navigation Bar Backdrop Blur */
+.glass-nav {
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+/* Custom Selection Line Height Adjustments */
+.heading-leading {
+  line-height: 1.05;
+}
+
+/* Abstract Orbit Sequences */
+@keyframes spin-clockwise {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes spin-counter-clockwise {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+
+.animate-orbit-cw {
+  animation: spin-clockwise 28s linear infinite;
+}
+
+.animate-orbit-ccw {
+  animation: spin-counter-clockwise 20s linear infinite;
+}
+
+/* Brand Marquee Ticker Tape Styling */
+@keyframes continuous-marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-33.3333%); }
+}
+
+.animate-marquee {
+  animation: continuous-marquee 35s linear infinite;
+}

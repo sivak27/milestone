@@ -1,0 +1,291 @@
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&display=swap");
+
+.services{
+    background:#f7faf8;
+    padding:6rem 0;
+}
+
+.services-header{
+    width:80%;
+    margin:0 auto 5rem;
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    gap:40px;
+}
+
+.header-left{
+    flex:1;
+    max-width:700px;
+}
+
+.header-right{
+    width:360px;
+}
+
+.tag{
+    display:block;
+    margin-bottom:14px;
+    font-family:"Montserrat",sans-serif;
+    font-size:.72rem;
+    font-weight:400;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    color:#5B6661;
+}
+
+.head{
+    margin:0;
+    font-family:"Cormorant Garamond",serif;
+    font-size:clamp(2.8rem,5vw,4.5rem);
+    font-weight:400;
+    line-height:1.05;
+    letter-spacing:-0.02em;
+    color:#111;
+    width:55vw;
+}
+
+.italic{
+    font-style:italic;
+    color:#5B6661;
+}
+
+.subhead{
+    margin:0;
+    font-family:"Montserrat",sans-serif;
+    font-size:17px;
+    line-height:1.7;
+    color:#5b6661;
+    width:45vw;
+    max-width:24rem;
+}
+
+.services-grid{
+     width: 90%;
+  max-width: 1200px;
+  margin: auto;
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+ 
+}
+.service-card {
+    position: relative;
+    overflow: hidden;
+
+    padding: 30px;
+    border-radius: 28px;
+
+    background: #fff;
+    border: 1px solid rgba(0,0,0,.07);
+
+    transition: transform 0.35s ease,
+                box-shadow 0.35s ease;
+}
+
+.service-card:hover {
+    transform: translateY(-8px);
+
+    box-shadow:
+        0 12px 30px rgba(0,0,0,0.08),
+        0 4px 10px rgba(0,0,0,0.05);
+
+    cursor: pointer;
+}
+.service-card::before{
+    content: "";
+    position: absolute;
+
+    top: -120px;
+    right: -120px;
+
+    width: 220px;
+    height: 250px;
+
+    border-radius: 50%;
+
+    background: radial-gradient(
+        circle,
+        rgba(124, 199, 165, .35) 0%,
+        rgba(124, 199, 165, .18) 40%,
+        transparent 75%
+    );
+
+    opacity: 0;
+
+    transition: opacity .45s ease;
+}
+
+.service-card:hover::before{
+    opacity: 1;
+}
+
+.top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    margin-bottom:25px;
+}
+
+.metric{
+    text-align:right;
+    margin-top:-6px;
+}
+
+.metric-value{
+    font-family:"Inter",sans-serif;
+    font-size:1.25rem;
+    font-weight:400;
+    line-height:1;
+    margin:0;
+    color:#0e1412;
+    margin-bottom:8px;
+}
+
+.metric-label{
+    margin-top:15px;
+    font-size:11px;
+    color:#5b6661;
+    text-transform:uppercase;
+    font-family:"Montserrat",sans-serif;
+}
+
+.icon-box{
+    width:52px;
+    height:52px;
+
+    border-radius:50%;
+
+    background:#dff5e7;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    transition:.35s;
+}
+
+.service-card:hover .icon-box{
+    transform:rotate(8deg);
+}
+
+.service-title{
+    font-family:"Cormorant Garamond",serif;
+    font-size:1.5rem;
+    font-weight:400;
+}
+
+.service-desc{
+    font-family:"Montserrat",sans-serif;
+    font-size:.875rem;
+    line-height:1.625rem;
+    color:#5b6661;
+    margin-top:10px;
+}
+
+.contact-card{
+    text-align:center;
+    background:linear-gradient(135deg,#dff5e766,transparent);
+    padding:30px;
+    border-radius:35px;
+}
+
+.btn{
+    margin-top:20px;
+    padding:14px 28px;
+    border:none;
+    border-radius:50px;
+    font-size:.875rem;
+    background:#1a1f1d;
+    color:#fff;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.btn:hover{
+    transform:translateY(-2px);
+}
+
+/* Tablet */
+
+@media (max-width:992px){
+
+.services-header{
+    width:90%;
+    gap:30px;
+}
+
+.head{
+    width:100%;
+}
+
+.subhead{
+    width:100%;
+}
+
+.services-grid{
+    grid-template-columns:repeat(2,1fr);
+}
+
+}
+
+/* Mobile */
+
+@media (max-width:768px){
+
+.services{
+    padding:4rem 0;
+}
+
+.services-header{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:16px;
+    width:90%;
+    margin-bottom:3rem;
+}
+
+.header-left,
+.header-right{
+    width:100%;
+    max-width:100%;
+}
+
+.tag{
+    margin-bottom:10px;
+}
+
+.head{
+    width:100%;
+    font-size:clamp(2.3rem,10vw,3.4rem);
+    line-height:1.1;
+}
+
+.subhead{
+    margin:0;
+    width:100%;
+    max-width:100%;
+    font-size:16px;
+    line-height:1.7;
+}
+
+.services-grid{
+    grid-template-columns:1fr;
+    width:90%;
+    gap:18px;
+}
+
+.service-card{
+    padding:24px;
+}
+
+.metric-value{
+    font-size:1.15rem;
+}
+
+.metric-label{
+    font-size:10px;
+}
+
+}

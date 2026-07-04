@@ -1,0 +1,182 @@
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap");
+
+.testimonials{
+    padding:120px 0;
+    
+    max-height: 108vh;
+    background:
+        radial-gradient(circle at top center,
+        rgba(223,245,231,.55),
+        transparent 60%),
+        #f8faf8;
+}
+
+.testimonials-container{
+    width:min(1000px,90%);
+    margin:auto;
+}
+
+.eyebrow{
+    font-family:"Montserrat", sans-serif;;
+    font-size:0.7rem;
+    letter-spacing:.28em;
+    text-transform:uppercase;
+    color:#69716b;
+    margin-bottom:24px;
+}
+
+.testimonials-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:40px;
+    margin-bottom:50px;
+}
+
+.testimonial-title{
+    font-family:"Cormorant Garamond",serif;
+    font-size:clamp(2.25rem, 5vw, 4rem);
+    font-weight:400;
+    line-height:.95;
+    color:#1d1d1d;
+}
+
+.testimonial-title span{
+    font-style:italic;
+    color:#6a736d;
+}
+
+.testimonial-nav{
+    display:flex;
+    gap:14px;
+    margin-top:22px;
+}
+
+.testimonial-nav button{
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    border:1px solid #e6e7e3;
+    background:white;
+    cursor:pointer;
+    display:grid;
+    place-items:center;
+    transition:.25s;
+}
+
+.testimonial-nav button:hover{
+    background:#ecfaf3;
+}
+
+.testimonial-card{
+    max-width:650px;
+    max-height:500px;
+    background:white;
+    border-radius:34px;
+    border:1px solid #e7ebe7;
+    padding:70px;
+    box-shadow:
+    0 25px 60px rgba(0,0,0,.05);
+}
+
+.quote-icon{
+    color:#8ed8b5;
+    margin-bottom:35px;
+}
+
+.testimonial-text{
+    font-family:"Cormorant Garamond",serif;
+    font-size:1.875rem;
+    line-height:1.25;
+    font-weight:500;
+    color:#202020;
+    max-width:500px;
+}
+
+.testimonial-author{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-top:50px;
+}
+
+.avatar{
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    display:grid;
+    place-items:center;
+    font-family:"Cormorant Garamond",serif;
+    font-size:15px;
+    background:linear-gradient(135deg,#d8f7e7,#9bd7b6);
+    color:#1d1d1d;
+    margin-top:20px;
+}
+
+.testimonial-card{
+    position: relative;
+    overflow: hidden;
+    will-change: transform, opacity;
+}
+
+.testimonials-container{
+    overflow: hidden;
+}
+.testimonial-author h4{
+    font-family:"montserrat",sans-serif;
+    font-size:15px;
+    font-weight:500;
+    margin-bottom:4px;
+    color:#222;
+}
+
+.testimonial-author span{
+    font-family:Inter,sans-serif;
+    color:#707874;
+    font-size:12px;
+}
+
+.testimonial-dots{
+    display:flex;
+    gap:10px;
+    margin-top:28px;
+}
+
+.testimonial-dots button{
+    width:18px;
+    height:5px;
+    border:none;
+    border-radius:10px;
+    background:#d6d8d5;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.testimonial-dots button.active{
+    width:42px;
+    background:#1b1b1b;
+}
+
+@media(max-width:900px){
+
+.testimonials{
+padding:80px 0;
+}
+
+.testimonials-top{
+flex-direction:column;
+}
+
+.testimonial-card{
+padding:40px 28px;
+}
+
+.testimonial-text{
+font-size:2rem;
+}
+
+.testimonial-author h4{
+font-size:22px;
+}
+
+}

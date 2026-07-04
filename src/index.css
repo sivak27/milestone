@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --ink: #111111;
+  --muted-foreground: #555555;
+  --accent: #10b981;
+  --mint: #e2f3e2;
+}
+
+body {
+  color: var(--ink);
+  background-color: #fafdfa;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  letter-spacing: -0.01em;
+}
+
+/* --- Ticker Marquee Animation --- */
+@keyframes marquee-scroll {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee-loop {
+  animation: marquee-scroll 32s linear infinite;
+}
+
+/* --- Background Orbit Animations --- */
+@keyframes orbit-rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.animate-orbit {
+  animation: orbit-rotate 24s linear infinite;
+}
+
+.animate-orbit-reverse {
+  animation: orbit-rotate 28s linear infinite reverse;
+}
