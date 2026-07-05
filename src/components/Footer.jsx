@@ -14,8 +14,8 @@ export default function Footer() {
         {/* Left */}
         <div className="footer-brand">
           <div className="logo">
-            <span>g</span>
-            <h3>kaizen</h3>
+            <span>MS</span>
+            <h3>MileStone</h3>
           </div>
 
           <p>
@@ -30,7 +30,7 @@ export default function Footer() {
           <h5>CONTACT</h5>
 
           <a href="mailto:hari@growthstudio.com">
-            hariharan.growthpartner@gmail.com.com
+            hariharan.growthpartner@gmail.com
           </a>
 
           <a href="tel:+919344260752">
@@ -68,7 +68,7 @@ export default function Footer() {
       <div className="footer-bottom">
 
         <p>
-          © {new Date().getFullYear()} Kaizen. All rights reserved.
+          © {new Date().getFullYear()} MileStone. All rights reserved.
         </p>
 
         <span>
