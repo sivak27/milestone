@@ -222,27 +222,7 @@ export default function HeroSection() {
           ))}
         </nav>
 
-        <button 
-          style={{ 
-            backgroundColor: "#0E1412", 
-            color: "#fff", 
-            fontSize: "16px", 
-            fontWeight: 500, 
-            padding: "12px 24px", 
-            borderRadius: "9999px", 
-            border: "none", 
-            display: "flex", 
-            alignItems: "center", 
-            gap: "8px", 
-            cursor: "pointer",
-            boxShadow: "0 4px 12px rgba(14,20,18,0.05)",
-            transition: "background-color 0.2s"
-          }}
-          onMouseEnter={(e) => e.target.style.backgroundColor = "#000"}
-          onMouseLeave={(e) => e.target.style.backgroundColor = "#0E1412"}
-        >
-          Book a call <span style={{ fontSize: "11px" }}>→</span>
-        </button>
+        
       </header>
 
       {/* STAGE CONTAINER */}
