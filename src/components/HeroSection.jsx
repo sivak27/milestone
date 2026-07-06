@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { Search, TrendingUp, BarChart3, ArrowUpRight } from "lucide-react";
 import Logo1 from "/src/assets/1.png";
@@ -6,8 +6,14 @@ import Logo2 from "/src/assets/2.png";
 import Logo3 from "/src/assets/3.png";
 import Logo4 from "/src/assets/4.png";
 import Logo5 from "/src/assets/5.png";
-import "./HeroSection.css";
 
+const links = [
+  { href: "#philosophy", label: "Philosophy" },
+  { href: "#services", label: "Services" },
+  { href: "#process", label: "Process" },
+  { href: "#work", label: "Work" },
+  { href: "#contact", label: "Contact" },
+];
 
 function FloatingCard({ styleOverrides = {}, delay = 0, children, parallax = 20, mx, my }) {
   const tx = useTransform(mx, (v) => v * parallax);
@@ -15,6 +21,7 @@ function FloatingCard({ styleOverrides = {}, delay = 0, children, parallax = 20,
 
   return (
     <motion.div
+      className="hero-floating-card"
       style={{ 
         x: tx, 
         y: ty,
@@ -40,6 +47,9 @@ function FloatingCard({ styleOverrides = {}, delay = 0, children, parallax = 20,
 
 export default function HeroSection() {
   const containerRef = useRef(null);
+  const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
   const mx = useMotionValue(0);
   const my = useMotionValue(0);
   const springX = useSpring(mx, { stiffness: 60, damping: 26 });
@@ -49,24 +59,35 @@ export default function HeroSection() {
   const rightX = useTransform(springX, (v) => v * -10);
 
   useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 30);
+    };
+
     const handleMouseMove = (e) => {
+      if (window.innerWidth < 900) return;
       const element = containerRef.current;
       if (!element) return;
       const rect = element.getBoundingClientRect();
       mx.set(((e.clientX - rect.left) / rect.width - 0.5) * 2);
       my.set(((e.clientY - rect.top) / rect.height - 0.5) * 2);
     };
+
+    window.addEventListener("scroll", handleScroll);
     window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
+    
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("mousemove", handleMouseMove);
+    };
   }, [mx, my]);
 
-  // JAVASCRIPT SMOOTH SCROLL MECHANISM
   const handleScrollToSection = (e, targetId) => {
     e.preventDefault();
+    setOpen(false); 
     const element = document.getElementById(targetId.toLowerCase());
     if (element) {
       const elementPosition = element.getBoundingClientRect().top + window.scrollY;
-      const offsetPosition = elementPosition - 90; // perfectly accounts for header height
+      const offsetPosition = elementPosition - 90;
 
       window.scrollTo({
         top: offsetPosition,
@@ -77,7 +98,7 @@ export default function HeroSection() {
 
   return (
     <div 
-      id="home" /* Pinned target for Home */
+      id="home"
       className="raw-font-sans"
       style={{ 
         minHeight: "100vh", 
@@ -89,11 +110,11 @@ export default function HeroSection() {
         alignItems: "center",
         boxSizing: "border-box",
         position: "relative",
-        overflow: "hidden"
+        overflowX: "hidden"
       }}
     >
       
-      {/* Global CSS Style Injections */}
+      {/* CSS System Overhaul for Navbar Mechanics and Grid Flow */}
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
         
@@ -133,8 +154,313 @@ export default function HeroSection() {
         }
 
         .marquee-container-loop img {
-          height: 200px;
+          height: 50px;
           width: auto;
+        }
+
+        .app-header {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100vw;
+          display: flex;
+          flex-direction: column;
+          z-index: 9999;
+          backdrop-filter: blur(8px);
+          WebkitBackdropFilter: blur(8px);
+          background: rgba(247, 250, 248, 0.75);
+          border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+          transition: 0.35s;
+        }
+
+        .app-header.scrolled {
+          backdrop-filter: blur(18px);
+          WebkitBackdropFilter: blur(18px);
+          background: rgba(247, 250, 248, 0.94);
+        }
+
+        .nav-container {
+          width: 100%;
+          max-width: 1440px;
+          margin: auto;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 14px 80px;
+          height: 90px;
+          box-sizing: border-box;
+        }
+
+        .desktop-menu-wrapper {
+          position: absolute;
+          left: 50%;
+          transform: translateX(-50%);
+          display: flex;
+          align-items: center;
+          gap: 4px;
+          background: white;
+          padding: 8px 24px;
+          border-radius: 9999px;
+          border: 1px solid #e7ebe7;
+          box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+        }
+
+        .desktop-menu-wrapper a {
+          font-size: 15px;
+          font-weight: 500;
+          color: #52525b;
+          text-decoration: none;
+          padding: 6px 18px;
+          border-radius: 9999px;
+          transition: all 0.3s;
+        }
+
+        .desktop-menu-wrapper a:hover {
+          background: #eef5ef;
+          color: #000;
+        }
+
+        .call-btn {
+          background: #101514;
+          color: white;
+          padding: 10px 24px;
+          border-radius: 9999px;
+          font-weight: 600;
+          font-size: 15px;
+          text-decoration: none;
+          transition: 0.3s;
+        }
+
+        .call-btn:hover {
+          transform: translateY(-2px);
+        }
+
+        .menu-btn {
+          display: none;
+          background: none;
+          border: none;
+          cursor: pointer;
+          z-index: 10000;
+          padding: 8px;
+        }
+
+        .menu-btn span {
+          display: block;
+          width: 26px;
+          height: 2px;
+          background: #111;
+          margin: 5px 0;
+          transition: 0.3s;
+        }
+
+        /* Fixed Mobile Burger Toggle Transform States */
+        .menu-btn.is-active span:nth-child(1) {
+          transform: translateY(3.5px) rotate(45deg);
+        }
+        .menu-btn.is-active span:nth-child(2) {
+          transform: translateY(-3.5px) rotate(-45deg);
+        }
+
+        .mobile-menu {
+          display: none;
+        }
+
+        .hero-stage {
+          position: relative;
+          width: 100%;
+          max-width: 1440px;
+          padding: 170px 80px 80px 80px;
+          z-index: 10;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: space-between;
+          box-sizing: border-box;
+          gap: 40px;
+        }
+
+        .hero-left {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          width: 50%;
+          box-sizing: border-box;
+        }
+
+        .hero-right {
+          position: relative;
+          width: 48%;
+          height: 540px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          box-sizing: border-box;
+        }
+
+        .hero-graphic-box {
+          position: absolute; 
+          width: 460px; 
+          height: 480px; 
+          z-index: 10;
+        }
+
+        /* --- MOBILE LAYOUT RECONSTRUCTION SYSTEM --- */
+        @media(max-width: 1024px) {
+          .hero-title {
+            font-size: 58px !important;
+          }
+        }
+
+        @media(max-width: 900px) {
+          .nav-container {
+            padding: 14px 32px;
+          }
+          .desktop-menu-wrapper,
+          .call-btn {
+            display: none;
+          }
+          .menu-btn {
+            display: block;
+          }
+          
+          /* Renders cleanly on top of hero layers */
+          .mobile-menu {
+            display: flex;
+            flex-direction: column;
+            background: #ffffff;
+            overflow: hidden;
+            max-height: 0;
+            transition: max-height 0.35s ease-in-out, padding 0.35s ease-in-out;
+            width: 100vw;
+            box-sizing: border-box;
+          }
+          
+          .mobile-menu.show {
+            max-height: 450px;
+            padding: 10px 32px 32px 32px;
+            border-bottom: 1px solid #ececec;
+          }
+          
+          .mobile-menu a {
+            padding: 18px 0;
+            font-size: 18px;
+            font-weight: 500;
+            color: #222;
+            text-decoration: none;
+            border-bottom: 1px solid #f5f5f5;
+          }
+          
+          .mobile-btn {
+            margin-top: 20px;
+            background: #101514;
+            color: white !important;
+            text-align: center;
+            border-radius: 9999px;
+            padding: 14px;
+            font-weight: 600;
+            border: none !important;
+          }
+
+          /* Changes Hero Layout Structural Direction */
+          .hero-stage {
+            flex-direction: column !important;
+            padding: 140px 24px 60px 24px !important;
+            gap: 48px;
+            align-items: center !important;
+            text-align: center;
+          }
+          
+          .hero-left {
+            width: 100% !important;
+            align-items: center !important;
+          }
+
+          .hero-title {
+            align-items: center !important;
+            font-size: 52px !important;
+          }
+
+          .hero-title span {
+            text-align: center;
+          }
+
+          .hero-left p {
+            margin: 20px auto 0 auto !important;
+          }
+
+          .hero-left-actions {
+            justify-content: center;
+            width: 100%;
+          }
+
+          .hero-counters-wrapper {
+            margin-left: auto;
+            margin-right: auto;
+            justify-content: center !important;
+            gap: 32px !important;
+          }
+
+          /* Converts raw dynamic cards wrapper to stacked fluid blocks */
+          .hero-right {
+            width: 100% !important;
+            height: auto !important;
+            display: block !important;
+          }
+          
+          .hero-orbit-circles {
+            display: none !important; /* Drops space consuming decorations on screen constraint */
+          }
+          
+          .hero-graphic-box {
+            position: relative !important;
+            width: 100% !important;
+            height: auto !important;
+            display: grid !important;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            transform: none !important;
+          }
+
+          .hero-floating-card {
+            position: relative !important;
+            top: auto !important;
+            left: auto !important;
+            right: auto !important;
+            bottom: auto !important;
+            width: 100% !important;
+            transform: none !important;
+            box-shadow: 0 4px 20px rgba(14,20,18,0.02) !important;
+            padding: 20px !important;
+          }
+        }
+
+        @media(max-width: 600px) {
+          .hero-graphic-box {
+            grid-template-columns: 1fr !important; /* Stack cleanly vertical on tight viewports */
+          }
+          .hero-title {
+            font-size: 42px !important;
+          }
+          .hero-left-actions {
+            flex-direction: column;
+            width: 100%;
+            gap: 12px !important;
+          }
+          .hero-left-actions a {
+            width: 100%;
+            justify-content: center;
+            box-sizing: border-box;
+          }
+          .nav-container {
+            padding: 14px 20px;
+          }
+          .mobile-menu.show {
+            padding: 10px 20px 32px 20px;
+          }
+          .hero-counters-wrapper {
+            flex-wrap: wrap;
+            gap: 24px !important;
+          }
         }
       `}</style>
       
@@ -165,84 +491,62 @@ export default function HeroSection() {
           background: "radial-gradient(circle at 60% 40%, #B7E6CE 0%, #DFF4E8 50%, transparent 75%)"
         }}
       />
-{/* HEADER LAYER */}
-      <header className="app-header"
-        style={{ 
-          position: "fixed",
-          top: 0,
-          left: 0,
-          width: "100vw",
-          height: "90px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          padding: "0 80px",
-          boxSizing: "border-box",
-          zIndex: 100,
-          backgroundColor: "rgba(250, 253, 250, 0.4)",
-          backdropFilter: "blur(20px)",
-          WebkitBackdropFilter: "blur(20px)",
-          borderBottom: "1px solid rgba(14, 20, 18, 0.03)"
-        }}
-      >
-        <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-          <div style={{ width: "34px", height: "34px", borderRadius: "50%", backgroundColor: "#0E1412", color: "#fff", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "700", fontSize: "13px" }}>MS</div>
-          <div style={{ display: "flex", flexDirection: "column" }}>
-            <span style={{ fontWeight: 600, fontSize: "18px", color: "#0E1412", letterSpacing: "0.01em", lineHeight: 1 }}>MileStone</span>
-            <span style={{ fontSize: "8px", color: "#9ca3af", fontWeight: "700", letterSpacing: "0.22em", textTransform: "uppercase", marginTop: "5px", lineHeight: 1 }}>EST. 2026</span>
+
+      {/* NAVBAR LAYER */}
+      <header className={`app-header ${scrolled ? "scrolled" : ""}`}>
+        <div className="nav-container">
+          <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+            <div style={{ width: "34px", height: "34px", borderRadius: "50%", backgroundColor: "#0E1412", color: "#fff", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "700", fontSize: "13px" }}>MS</div>
+            <div style={{ display: "flex", flexDirection: "column" }}>
+              <span style={{ fontWeight: 600, fontSize: "18px", color: "#0E1412", letterSpacing: "0.01em", lineHeight: 1 }}>MileStone</span>
+              <span style={{ fontSize: "8px", color: "#9ca3af", fontWeight: "700", letterSpacing: "0.22em", textTransform: "uppercase", marginTop: "5px", lineHeight: 1 }}>EST. 2026</span>
+            </div>
           </div>
+
+          <nav className="desktop-menu-wrapper">
+            <a href="#home" onClick={(e) => handleScrollToSection(e, "home")}>Home</a>
+            {links.map((item) => (
+              <a 
+                key={item.href} 
+                href={item.href}
+                onClick={(e) => handleScrollToSection(e, item.label)}
+              >
+                {item.label}
+              </a>
+            ))}
+          </nav>
+
+          <a href="#contact" onClick={(e) => handleScrollToSection(e, "contact")} className="call-btn">
+            Book a call →
+          </a>
+
+          <button className={`menu-btn ${open ? "is-active" : ""}`} onClick={() => setOpen(!open)}>
+            <span></span>
+            <span></span>
+          </button>
         </div>
 
-        <nav className="desktop-nav"
-          style={{ 
-            position: "absolute",
-            left: "50%",
-            transform: "translateX(-50%)",
-            display: "flex",
-            alignItems: "center",
-            gap: "4px", 
-            backgroundColor: "rgba(255, 255, 255, 0.85)", 
-            border: "1px solid rgba(14, 20, 18, 0.05)", 
-            borderRadius: "9999px", 
-            padding: "8px 24px",
-            boxShadow: "0 2px 12px rgba(0,0,0,0.01)"
-          }}
-        >
-          {['Home', 'Philosophy', 'Services', 'Process', 'Work', 'Contact'].map((item) => (
+        <div className={`mobile-menu ${open ? "show" : ""}`}>
+          <a href="#home" onClick={(e) => handleScrollToSection(e, "home")}>Home</a>
+          {links.map((item) => (
             <a 
-              key={item} 
-              href={`#${item.toLowerCase()}`}
-              onClick={(e) => handleScrollToSection(e, item)}
-              style={{ fontSize: "18px", fontWeight: 500, color: "#52525b", textDecoration: "none", padding: "6px 18px", transition: "color 0.2s" }}
-              onMouseEnter={(e) => e.target.style.color = "#000"}
-              onMouseLeave={(e) => e.target.style.color = "#52525b"}
+              key={item.href} 
+              href={item.href} 
+              onClick={(e) => handleScrollToSection(e, item.label)}
             >
-              {item}
+              {item.label}
             </a>
           ))}
-        </nav>
-
-        
+          <a href="#contact" className="mobile-btn" onClick={(e) => handleScrollToSection(e, "contact")}>
+            Book a call
+          </a>
+        </div>
       </header>
 
       {/* STAGE CONTAINER */}
-      <section className="hero-stage"
-        ref={containerRef} 
-        style={{
-          position: "relative",
-          width: "100%",
-          maxWidth: "1440px",
-          padding: "160px 80px 80px 80px",
-          zIndex: 10,
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "center",
-          justifyContent: "space-between",
-          boxSizing: "border-box"
-        }}
-      >
+      <section className="hero-stage" ref={containerRef}>
         {/* Left Side Content Area */}
-        <motion.div className="hero-left" style={{ x: leftX, display: "flex", flexDirection: "column", alignItems: "flex-start", width: "50%", boxSizing: "border-box" }}>
+        <motion.div className="hero-left" style={{ x: leftX }}>
           
           <div style={{ display: "inline-flex", alignItems: "center", gap: "8px", backgroundColor: "#edf7ed", border: "1px solid #d2ebd2", padding: "5px 14px", borderRadius: "9999px", fontSize: "10px", fontWeight: "700", color: "#1e5631", marginBottom: "28px", letterSpacing: "0.06em" }}>
             <span style={{ width: "6px", height: "6px", borderRadius: "50%", backgroundColor: "#10b981" }} />
@@ -250,7 +554,6 @@ export default function HeroSection() {
           </div>
 
           <div>
-            {/* Cleaned up Heading: IDs REMOVED from the internal word lines */}
             <h1 
               className="raw-font-serif hero-title" 
               style={{ 
@@ -282,7 +585,7 @@ export default function HeroSection() {
             </p>
           </div>
 
-          <div style={{ marginTop: "36px", display: "flex", alignItems: "center", gap: "16px" }}>
+          <div className="hero-left-actions" style={{ marginTop: "36px", display: "flex", alignItems: "center", gap: "16px" }}>
             <a href="#work" onClick={(e) => handleScrollToSection(e, "work")} style={{ backgroundColor: "#0E1412", color: "#fff", padding: "14px 24px", borderRadius: "9999px", fontSize: "15px", fontWeight: 500, textDecoration: "none", display: "flex", alignItems: "center", gap: "8px", boxShadow: "0 4px 12px rgba(0,0,0,0.05)" }}>
               See growth stories <ArrowUpRight style={{ width: "15px", height: "15px" }} />
             </a>
@@ -292,7 +595,7 @@ export default function HeroSection() {
           </div>
 
           {/* Bottom Counters */}
-          <div style={{ marginTop: "64px", display: "flex", width: "100%", maxWidth: "420px", justifyContent: "space-between", borderTop: "1px solid #f4f4f5", paddingTop: "28px" }}>
+          <div className="hero-counters-wrapper" style={{ marginTop: "64px", display: "flex", width: "100%", maxWidth: "420px", justifyContent: "space-between", borderTop: "1px solid #f4f4f5", paddingTop: "28px" }}>
             {[
               { num: "3.5+", label: "Years building" },
               { num: "15+", label: "Brands scaled" },
@@ -307,10 +610,8 @@ export default function HeroSection() {
         </motion.div>
 
         {/* Right Side Cards Layer */}
-        <motion.div className="hero-right"
-          style={{ x: rightX, position: "relative", width: "45%", height: "540px", display: "flex", alignItems: "center", justifyContent: "center", boxSizing: "border-box" }}
-        >
-          <div style={{ position: "absolute", inset: 0, display: "grid", placeItems: "center", pointerEvents: "none", zIndex: 0 }}>
+        <motion.div className="hero-right" style={{ x: rightX }}>
+          <div className="hero-orbit-circles" style={{ position: "absolute", inset: 0, display: "grid", placeItems: "center", pointerEvents: "none", zIndex: 0 }}>
             <div style={{ position: "relative", width: "440px", height: "440px", borderRadius: "50%", border: "1px solid rgba(14,20,18,0.04)" }}>
               <div style={{ position: "absolute", inset: "70px", borderRadius: "50%", border: "1px solid rgba(14,20,18,0.02)" }} />
               <div style={{ position: "absolute", inset: "140px", borderRadius: "50%", border: "1px solid rgba(14,20,18,0.015)" }} />
@@ -324,7 +625,7 @@ export default function HeroSection() {
             </div>
           </div>
 
-          <div style={{ position: "absolute", width: "460px", height: "480px", zIndex: 10 }}>
+          <div className="hero-graphic-box">
             <FloatingCard mx={springX} my={springY} delay={0.2} parallax={-15} styleOverrides={{ top: 0, left: 0, width: "200px" }}>
               <div style={{ display: "flex", alignItems: "center", gap: "6px", fontSize: "9px", color: "#a1a1aa", fontWeight: "700", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: "8px" }}>
                 <Search style={{ width: "12px", height: "12px" }} /> search
@@ -337,8 +638,8 @@ export default function HeroSection() {
               </div>
             </FloatingCard>
 
-            <FloatingCard mx={springX} my={springY} delay={0.3} parallax={14} styleOverrides={{ top: "40px", right: "-20px", width: "250px" }}>
-              <div style={{ display: "flex", alignItems: "center", justifyInbound: "space-between", marginBottom: "10px" }}>
+            <FloatingCard mx={springX} my={springY} delay={0.3} parallax={14} styleOverrides={{ top: "40px", right: 0, width: "230px" }}>
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "10px" }}>
                 <span style={{ fontSize: "9px", color: "#a1a1aa", fontWeight: "700", textTransform: "uppercase", letterSpacing: "0.06em" }}>Conversions</span>
                 <span style={{ backgroundColor: "#eef7ee", color: "#047857", fontWeight: 800, fontSize: "8px", letterSpacing: "0.08em", padding: "2px 8px", borderRadius: "999px" }}>LIVE</span>
               </div>
@@ -355,7 +656,7 @@ export default function HeroSection() {
               </svg>
             </FloatingCard>
 
-            <FloatingCard mx={springX} my={springY} delay={0.4} parallax={-10} styleOverrides={{ bottom: "10px", left: "20px", width: "230px" }}>
+            <FloatingCard mx={springX} my={springY} delay={0.4} parallax={-10} styleOverrides={{ bottom: "20px", left: "10px", width: "210px" }}>
               <div style={{ display: "flex", alignItems: "center", gap: "6px", fontSize: "9px", color: "#a1a1aa", fontWeight: "700", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: "8px" }}>
                 <BarChart3 style={{ width: "12px", height: "12px" }} /> Monthly leads
               </div>
@@ -365,7 +666,7 @@ export default function HeroSection() {
               </div>
             </FloatingCard>
 
-            <FloatingCard mx={springX} my={springY} delay={0.5} parallax={10} styleOverrides={{ bottom: "100px", right: "0px", padding: "14px 18px", width: "150px" }}>
+            <FloatingCard mx={springX} my={springY} delay={0.5} parallax={10} styleOverrides={{ bottom: "90px", right: "10px", padding: "14px 18px", width: "150px" }}>
               <div style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "13px", fontWeight: 500 }}>
                 <TrendingUp style={{ width: "15px", height: "15px", color: "#10b981" }} />
                 <span style={{ color: "#424242", fontSize: "11px" }}>CAC <span style={{ color: "#047857", fontWeight: "700" }}>↓ 38%</span></span>
