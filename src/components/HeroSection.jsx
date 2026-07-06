@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { Search, TrendingUp, BarChart3, ArrowUpRight } from "lucide-react";
 import Logo1 from "/src/assets/1.png";
@@ -6,14 +6,8 @@ import Logo2 from "/src/assets/2.png";
 import Logo3 from "/src/assets/3.png";
 import Logo4 from "/src/assets/4.png";
 import Logo5 from "/src/assets/5.png";
+import "./HeroSection.css";
 
-const links = [
-  { href: "#philosophy", label: "Philosophy" },
-  { href: "#services", label: "Services" },
-  { href: "#process", label: "Process" },
-  { href: "#work", label: "Work" },
-  { href: "#contact", label: "Contact" },
-];
 
 function FloatingCard({ styleOverrides = {}, delay = 0, children, parallax = 20, mx, my }) {
   const tx = useTransform(mx, (v) => v * parallax);
@@ -46,9 +40,6 @@ function FloatingCard({ styleOverrides = {}, delay = 0, children, parallax = 20,
 
 export default function HeroSection() {
   const containerRef = useRef(null);
-  const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-
   const mx = useMotionValue(0);
   const my = useMotionValue(0);
   const springX = useSpring(mx, { stiffness: 60, damping: 26 });
@@ -58,10 +49,6 @@ export default function HeroSection() {
   const rightX = useTransform(springX, (v) => v * -10);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 30);
-    };
-
     const handleMouseMove = (e) => {
       const element = containerRef.current;
       if (!element) return;
@@ -69,20 +56,13 @@ export default function HeroSection() {
       mx.set(((e.clientX - rect.left) / rect.width - 0.5) * 2);
       my.set(((e.clientY - rect.top) / rect.height - 0.5) * 2);
     };
-
-    window.addEventListener("scroll", handleScroll);
     window.addEventListener("mousemove", handleMouseMove);
-    
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("mousemove", handleMouseMove);
-    };
+    return () => window.removeEventListener("mousemove", handleMouseMove);
   }, [mx, my]);
 
   // JAVASCRIPT SMOOTH SCROLL MECHANISM
   const handleScrollToSection = (e, targetId) => {
     e.preventDefault();
-    setOpen(false); // Closes mobile menu on anchor tap
     const element = document.getElementById(targetId.toLowerCase());
     if (element) {
       const elementPosition = element.getBoundingClientRect().top + window.scrollY;
@@ -105,7 +85,7 @@ export default function HeroSection() {
         backgroundColor: "#fafdfa",
         display: "flex",
         flexDirection: "column",
-        justifyInbound: "center",
+        justifyContent: "center",
         alignItems: "center",
         boxSizing: "border-box",
         position: "relative",
@@ -156,160 +136,6 @@ export default function HeroSection() {
           height: 200px;
           width: auto;
         }
-
-        /* Combined Responsive Navbar CSS Rules */
-        .app-header {
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 100vw;
-          display: flex;
-          flex-direction: column;
-          z-index: 999;
-          backdrop-filter: blur(8px);
-          WebkitBackdropFilter: blur(8px);
-          background: rgba(247, 250, 248, 0.45);
-          border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-          transition: 0.35s;
-        }
-
-        .app-header.scrolled {
-          backdrop-filter: blur(18px);
-          WebkitBackdropFilter: blur(18px);
-          background: rgba(247, 250, 248, 0.88);
-        }
-
-        .nav-container {
-          width: 100%;
-          max-width: 1440px;
-          margin: auto;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          padding: 14px 80px;
-          height: 90px;
-          box-sizing: border-box;
-        }
-
-        .desktop-menu-wrapper {
-          position: absolute;
-          left: 50%;
-          transform: translateX(-50%);
-          display: flex;
-          align-items: center;
-          gap: 4px;
-          background: white;
-          padding: 8px 24px;
-          border-radius: 9999px;
-          border: 1px solid #e7ebe7;
-          box-shadow: 0 10px 30px rgba(0,0,0,0.03);
-        }
-
-        .desktop-menu-wrapper a {
-          font-size: 15px;
-          font-weight: 500;
-          color: #52525b;
-          text-decoration: none;
-          padding: 6px 18px;
-          border-radius: 9999px;
-          transition: all 0.3s;
-        }
-
-        .desktop-menu-wrapper a:hover {
-          background: #eef5ef;
-          color: #000;
-        }
-
-        .call-btn {
-          background: #101514;
-          color: white;
-          padding: 10px 24px;
-          border-radius: 9999px;
-          font-weight: 600;
-          font-size: 15px;
-          text-decoration: none;
-          transition: 0.3s;
-        }
-
-        .call-btn:hover {
-          transform: translateY(-2px);
-        }
-
-        .menu-btn {
-          display: none;
-          background: none;
-          border: none;
-          cursor: pointer;
-        }
-
-        .menu-btn span {
-          display: block;
-          width: 28px;
-          height: 2px;
-          background: #111;
-          margin: 6px 0;
-          transition: 0.3s;
-        }
-
-        .mobile-menu {
-          display: none;
-        }
-
-        @media(max-width: 900px) {
-          .nav-container {
-            padding: 14px 40px;
-          }
-          .desktop-menu-wrapper,
-          .call-btn {
-            display: none;
-          }
-          .menu-btn {
-            display: block;
-          }
-          .mobile-menu {
-            display: flex;
-            flex-direction: column;
-            background: white;
-            overflow: hidden;
-            max-height: 0;
-            transition: 0.4s;
-            border-top: 1px solid #ececec;
-            width: 100vw;
-          }
-          .mobile-menu.show {
-            max-height: 600px;
-            padding: 5px 40px 30px;
-          }
-          .mobile-menu a {
-            padding: 22px 0;
-            font-size: 18px;
-            color: #222;
-            text-decoration: none;
-            border-bottom: 1px solid #ececec;
-          }
-          .mobile-btn {
-            margin-top: 18px;
-            background: #101514;
-            color: white !important;
-            text-align: center;
-            border-radius: 9999px;
-            padding: 14px;
-            font-weight: 600;
-            border: none !important;
-          }
-        }
-
-        @media(max-width: 500px) {
-          .nav-container {
-            padding: 14px 20px;
-          }
-          .mobile-menu.show {
-            padding: 5px 20px 30px;
-          }
-          .mobile-menu a {
-            font-size: 22px;
-          }
-        }
       `}</style>
       
       {/* Grid Overlay */}
@@ -339,61 +165,64 @@ export default function HeroSection() {
           background: "radial-gradient(circle at 60% 40%, #B7E6CE 0%, #DFF4E8 50%, transparent 75%)"
         }}
       />
-
-      {/* REPLACED NAVBAR LAYER */}
-      <header className={`app-header ${scrolled ? "scrolled" : ""}`}>
-        <div className="nav-container">
-          {/* Logo */}
-          <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-            <div style={{ width: "34px", height: "34px", borderRadius: "50%", backgroundColor: "#0E1412", color: "#fff", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "700", fontSize: "13px" }}>MS</div>
-            <div style={{ display: "flex", flexDirection: "column" }}>
-              <span style={{ fontWeight: 600, fontSize: "18px", color: "#0E1412", letterSpacing: "0.01em", lineHeight: 1 }}>MileStone</span>
-              <span style={{ fontSize: "8px", color: "#9ca3af", fontWeight: "700", letterSpacing: "0.22em", textTransform: "uppercase", marginTop: "5px", lineHeight: 1 }}>EST. 2026</span>
-            </div>
+{/* HEADER LAYER */}
+      <header className="app-header"
+        style={{ 
+          position: "fixed",
+          top: 0,
+          left: 0,
+          width: "100vw",
+          height: "90px",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          padding: "0 80px",
+          boxSizing: "border-box",
+          zIndex: 100,
+          backgroundColor: "rgba(250, 253, 250, 0.4)",
+          backdropFilter: "blur(20px)",
+          WebkitBackdropFilter: "blur(20px)",
+          borderBottom: "1px solid rgba(14, 20, 18, 0.03)"
+        }}
+      >
+        <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+          <div style={{ width: "34px", height: "34px", borderRadius: "50%", backgroundColor: "#0E1412", color: "#fff", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "700", fontSize: "13px" }}>MS</div>
+          <div style={{ display: "flex", flexDirection: "column" }}>
+            <span style={{ fontWeight: 600, fontSize: "18px", color: "#0E1412", letterSpacing: "0.01em", lineHeight: 1 }}>MileStone</span>
+            <span style={{ fontSize: "8px", color: "#9ca3af", fontWeight: "700", letterSpacing: "0.22em", textTransform: "uppercase", marginTop: "5px", lineHeight: 1 }}>EST. 2026</span>
           </div>
-
-          {/* Desktop Navigation Menu */}
-          <nav className="desktop-menu-wrapper">
-            <a href="#home" onClick={(e) => handleScrollToSection(e, "home")}>Home</a>
-            {links.map((item) => (
-              <a 
-                key={item.href} 
-                href={item.href}
-                onClick={(e) => handleScrollToSection(e, item.label)}
-              >
-                {item.label}
-              </a>
-            ))}
-          </nav>
-
-          {/* Desktop Action Button */}
-          <a href="#contact" onClick={(e) => handleScrollToSection(e, "contact")} className="call-btn">
-            Book a call →
-          </a>
-
-          {/* Mobile Hamburguer Action Trigger */}
-          <button className="menu-btn" onClick={() => setOpen(!open)}>
-            <span></span>
-            <span></span>
-          </button>
         </div>
 
-        {/* Mobile Flyout Drawer Strip */}
-        <div className={`mobile-menu ${open ? "show" : ""}`}>
-          <a href="#home" onClick={(e) => handleScrollToSection(e, "home")}>Home</a>
-          {links.map((item) => (
+        <nav className="desktop-nav"
+          style={{ 
+            position: "absolute",
+            left: "50%",
+            transform: "translateX(-50%)",
+            display: "flex",
+            alignItems: "center",
+            gap: "4px", 
+            backgroundColor: "rgba(255, 255, 255, 0.85)", 
+            border: "1px solid rgba(14, 20, 18, 0.05)", 
+            borderRadius: "9999px", 
+            padding: "8px 24px",
+            boxShadow: "0 2px 12px rgba(0,0,0,0.01)"
+          }}
+        >
+          {['Home', 'Philosophy', 'Services', 'Process', 'Work', 'Contact'].map((item) => (
             <a 
-              key={item.href} 
-              href={item.href} 
-              onClick={(e) => handleScrollToSection(e, item.label)}
+              key={item} 
+              href={`#${item.toLowerCase()}`}
+              onClick={(e) => handleScrollToSection(e, item)}
+              style={{ fontSize: "18px", fontWeight: 500, color: "#52525b", textDecoration: "none", padding: "6px 18px", transition: "color 0.2s" }}
+              onMouseEnter={(e) => e.target.style.color = "#000"}
+              onMouseLeave={(e) => e.target.style.color = "#52525b"}
             >
-              {item.label}
+              {item}
             </a>
           ))}
-          <a href="#contact" className="mobile-btn" onClick={(e) => handleScrollToSection(e, "contact")}>
-            Book a call
-          </a>
-        </div>
+        </nav>
+
+        
       </header>
 
       {/* STAGE CONTAINER */}
@@ -421,6 +250,7 @@ export default function HeroSection() {
           </div>
 
           <div>
+            {/* Cleaned up Heading: IDs REMOVED from the internal word lines */}
             <h1 
               className="raw-font-serif hero-title" 
               style={{ 
@@ -508,7 +338,7 @@ export default function HeroSection() {
             </FloatingCard>
 
             <FloatingCard mx={springX} my={springY} delay={0.3} parallax={14} styleOverrides={{ top: "40px", right: "-20px", width: "250px" }}>
-              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "10px" }}>
+              <div style={{ display: "flex", alignItems: "center", justifyInbound: "space-between", marginBottom: "10px" }}>
                 <span style={{ fontSize: "9px", color: "#a1a1aa", fontWeight: "700", textTransform: "uppercase", letterSpacing: "0.06em" }}>Conversions</span>
                 <span style={{ backgroundColor: "#eef7ee", color: "#047857", fontWeight: 800, fontSize: "8px", letterSpacing: "0.08em", padding: "2px 8px", borderRadius: "999px" }}>LIVE</span>
               </div>
