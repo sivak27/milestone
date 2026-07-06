@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { Search, TrendingUp, BarChart3, ArrowUpRight } from "lucide-react";
 import Logo1 from "/src/assets/1.png";
@@ -8,13 +8,13 @@ import Logo4 from "/src/assets/4.png";
 import Logo5 from "/src/assets/5.png";
 import "./HeroSection.css";
 
+
 function FloatingCard({ styleOverrides = {}, delay = 0, children, parallax = 20, mx, my }) {
   const tx = useTransform(mx, (v) => v * parallax);
   const ty = useTransform(my, (v) => v * parallax);
 
   return (
     <motion.div
-      className="hero-floating-card"
       style={{ 
         x: tx, 
         y: ty,
@@ -40,9 +40,6 @@ function FloatingCard({ styleOverrides = {}, delay = 0, children, parallax = 20,
 
 export default function HeroSection() {
   const containerRef = useRef(null);
-  const [open, setOpen] = useState(false); // Manages mobile menu open/close toggle
-  const [scrolled, setScrolled] = useState(false);
-
   const mx = useMotionValue(0);
   const my = useMotionValue(0);
   const springX = useSpring(mx, { stiffness: 60, damping: 26 });
@@ -52,32 +49,20 @@ export default function HeroSection() {
   const rightX = useTransform(springX, (v) => v * -10);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 30);
-    };
-
     const handleMouseMove = (e) => {
-      if (window.innerWidth < 900) return;
       const element = containerRef.current;
       if (!element) return;
       const rect = element.getBoundingClientRect();
       mx.set(((e.clientX - rect.left) / rect.width - 0.5) * 2);
       my.set(((e.clientY - rect.top) / rect.height - 0.5) * 2);
     };
-
-    window.addEventListener("scroll", handleScroll);
     window.addEventListener("mousemove", handleMouseMove);
-    
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("mousemove", handleMouseMove);
-    };
+    return () => window.removeEventListener("mousemove", handleMouseMove);
   }, [mx, my]);
 
   // JAVASCRIPT SMOOTH SCROLL MECHANISM
   const handleScrollToSection = (e, targetId) => {
     e.preventDefault();
-    setOpen(false); // Automatically closes mobile dropdown menu upon selection
     const element = document.getElementById(targetId.toLowerCase());
     if (element) {
       const elementPosition = element.getBoundingClientRect().top + window.scrollY;
@@ -104,7 +89,7 @@ export default function HeroSection() {
         alignItems: "center",
         boxSizing: "border-box",
         position: "relative",
-        overflowX: "hidden"
+        overflow: "hidden"
       }}
     >
       
@@ -148,168 +133,8 @@ export default function HeroSection() {
         }
 
         .marquee-container-loop img {
-          height: 50px;
+          height: 200px;
           width: auto;
-        }
-
-        /* Responsive Mobile Dropdown Rules */
-        .app-header {
-          transition: background-color 0.3s, backdrop-filter 0.3s;
-        }
-
-        .menu-btn {
-          display: none;
-          background: none;
-          border: none;
-          cursor: pointer;
-          padding: 4px;
-        }
-
-        .menu-btn span {
-          display: block;
-          width: 24px;
-          height: 2px;
-          background: #0E1412;
-          margin: 5px 0;
-          transition: transform 0.3s, opacity 0.3s;
-        }
-
-        /* Animates hamburger lines into an 'X' close indicator */
-        .menu-btn.is-active span:nth-child(1) {
-          transform: translateY(7.5px) rotate(45deg);
-        }
-        .menu-btn.is-active span:nth-child(2) {
-          opacity: 0;
-        }
-        .menu-btn.is-active span:nth-child(3) {
-          transform: translateY(-6.5px) rotate(-45deg);
-        }
-
-        .mobile-dropdown-menu {
-          display: none;
-        }
-
-        /* Tablet & Mobile Breakpoint Restructuring */
-        @media (max-width: 900px) {
-          .app-header {
-            padding: 0 32px !important;
-            height: 80px !important;
-          }
-
-          .desktop-nav {
-            display: none !important; /* Hides desktop navigation pill */
-          }
-
-          .menu-btn {
-            display: block; /* Reveals mobile toggle trigger */
-          }
-
-          .mobile-dropdown-menu {
-            display: flex;
-            flex-direction: column;
-            position: absolute;
-            top: 80px;
-            left: 0;
-            width: 100vw;
-            background: rgba(250, 253, 250, 0.96);
-            backdrop-filter: blur(20px);
-            WebkitBackdropFilter: blur(20px);
-            border-bottom: 1px solid rgba(14, 20, 18, 0.05);
-            overflow: hidden;
-            max-height: 0;
-            transition: max-height 0.35s ease-in-out, padding 0.35s ease-in-out;
-            box-sizing: border-box;
-            z-index: 99;
-          }
-
-          .mobile-dropdown-menu.show {
-            max-height: 400px;
-            padding: 16px 32px 32px 32px;
-          }
-
-          .mobile-dropdown-menu a {
-            font-size: 18px;
-            font-weight: 500;
-            color: #52525b;
-            text-decoration: none;
-            padding: 16px 0;
-            border-bottom: 1px solid rgba(14, 20, 18, 0.03);
-            transition: color 0.2s;
-          }
-
-          .mobile-dropdown-menu a:last-child {
-            border-bottom: none;
-          }
-
-          .mobile-dropdown-menu a:hover {
-            color: #000;
-          }
-
-          /* Structural adjustments to keep hero content perfectly centered on mobile */
-          .hero-stage {
-            flex-direction: column !important;
-            padding: 130px 32px 60px 32px !important;
-            gap: 48px;
-            text-align: center;
-          }
-
-          .hero-left {
-            width: 100% !important;
-            align-items: center !important;
-          }
-
-          .hero-title {
-            align-items: center !important;
-            font-size: 52px !important;
-          }
-
-          .hero-left p {
-            margin: 20px auto 0 auto !important;
-          }
-
-          .hero-right {
-            width: 100% !important;
-            height: auto !important;
-          }
-
-          .hero-graphic-box {
-            position: relative !important;
-            width: 100% !important;
-            height: auto !important;
-            display: grid !important;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-            transform: none !important;
-          }
-
-          .hero-floating-card {
-            position: relative !important;
-            top: auto !important;
-            left: auto !important;
-            right: auto !important;
-            bottom: auto !important;
-            width: 100% !important;
-            transform: none !important;
-            padding: 20px !important;
-          }
-        }
-
-        @media (max-width: 550px) {
-          .app-header {
-            padding: 0 20px !important;
-          }
-          .mobile-dropdown-menu.show {
-            padding: 16px 20px 32px 20px;
-          }
-          .hero-stage {
-            padding: 110px 20px 40px 20px !important;
-          }
-          .hero-title {
-            font-size: 38px !important;
-          }
-          .hero-graphic-box {
-            grid-template-columns: 1fr !important; /* Stack simple cards on extra small viewports */
-          }
         }
       `}</style>
       
@@ -340,8 +165,7 @@ export default function HeroSection() {
           background: "radial-gradient(circle at 60% 40%, #B7E6CE 0%, #DFF4E8 50%, transparent 75%)"
         }}
       />
-
-      {/* HEADER LAYER WITH MOBILE TOGGLE */}
+{/* HEADER LAYER */}
       <header className="app-header"
         style={{ 
           position: "fixed",
@@ -355,7 +179,7 @@ export default function HeroSection() {
           padding: "0 80px",
           boxSizing: "border-box",
           zIndex: 100,
-          backgroundColor: scrolled ? "rgba(250, 253, 250, 0.9)" : "rgba(250, 253, 250, 0.4)",
+          backgroundColor: "rgba(250, 253, 250, 0.4)",
           backdropFilter: "blur(20px)",
           WebkitBackdropFilter: "blur(20px)",
           borderBottom: "1px solid rgba(14, 20, 18, 0.03)"
@@ -368,8 +192,8 @@ export default function HeroSection() {
             <span style={{ fontSize: "8px", color: "#9ca3af", fontWeight: "700", letterSpacing: "0.22em", textTransform: "uppercase", marginTop: "5px", lineHeight: 1 }}>EST. 2026</span>
           </div>
         </div>
+        
 
-        {/* Desktop Navigation Menu */}
         <nav className="desktop-nav"
           style={{ 
             position: "absolute",
@@ -399,31 +223,27 @@ export default function HeroSection() {
           ))}
         </nav>
 
-        {/* Hamburger Menu Toggle Button */}
-        <button className={`menu-btn ${open ? "is-active" : ""}`} onClick={() => setOpen(!open)}>
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-
-        {/* Mobile Dropdown Menu Drawer */}
-        <div className={`mobile-dropdown-menu ${open ? "show" : ""}`}>
-          {['Home', 'Philosophy', 'Services', 'Process', 'Work', 'Contact'].map((item) => (
-            <a 
-              key={item} 
-              href={`#${item.toLowerCase()}`}
-              onClick={(e) => handleScrollToSection(e, item)}
-            >
-              {item}
-            </a>
-          ))}
-        </div>
+        
       </header>
 
       {/* STAGE CONTAINER */}
-      <section className="hero-stage" ref={containerRef}>
+      <section className="hero-stage"
+        ref={containerRef} 
+        style={{
+          position: "relative",
+          width: "100%",
+          maxWidth: "1440px",
+          padding: "160px 80px 80px 80px",
+          zIndex: 10,
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "space-between",
+          boxSizing: "border-box"
+        }}
+      >
         {/* Left Side Content Area */}
-        <motion.div className="hero-left" style={{ x: leftX }}>
+        <motion.div className="hero-left" style={{ x: leftX, display: "flex", flexDirection: "column", alignItems: "flex-start", width: "50%", boxSizing: "border-box" }}>
           
           <div style={{ display: "inline-flex", alignItems: "center", gap: "8px", backgroundColor: "#edf7ed", border: "1px solid #d2ebd2", padding: "5px 14px", borderRadius: "9999px", fontSize: "10px", fontWeight: "700", color: "#1e5631", marginBottom: "28px", letterSpacing: "0.06em" }}>
             <span style={{ width: "6px", height: "6px", borderRadius: "50%", backgroundColor: "#10b981" }} />
@@ -431,6 +251,7 @@ export default function HeroSection() {
           </div>
 
           <div>
+            {/* Cleaned up Heading: IDs REMOVED from the internal word lines */}
             <h1 
               className="raw-font-serif hero-title" 
               style={{ 
@@ -486,11 +307,10 @@ export default function HeroSection() {
           </div>
         </motion.div>
 
-        {/* Right Side Cards Area */}
+        {/* Right Side Cards Layer */}
         <motion.div className="hero-right"
           style={{ x: rightX, position: "relative", width: "45%", height: "540px", display: "flex", alignItems: "center", justifyContent: "center", boxSizing: "border-box" }}
         >
-          {/* Orbit Background Circles */}
           <div style={{ position: "absolute", inset: 0, display: "grid", placeItems: "center", pointerEvents: "none", zIndex: 0 }}>
             <div style={{ position: "relative", width: "440px", height: "440px", borderRadius: "50%", border: "1px solid rgba(14,20,18,0.04)" }}>
               <div style={{ position: "absolute", inset: "70px", borderRadius: "50%", border: "1px solid rgba(14,20,18,0.02)" }} />
@@ -505,8 +325,7 @@ export default function HeroSection() {
             </div>
           </div>
 
-          {/* Floating Performance Analytics Grid */}
-          <div className="hero-graphic-box" style={{ position: "absolute", width: "460px", height: "480px", zIndex: 10 }}>
+          <div style={{ position: "absolute", width: "460px", height: "480px", zIndex: 10 }}>
             <FloatingCard mx={springX} my={springY} delay={0.2} parallax={-15} styleOverrides={{ top: 0, left: 0, width: "200px" }}>
               <div style={{ display: "flex", alignItems: "center", gap: "6px", fontSize: "9px", color: "#a1a1aa", fontWeight: "700", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: "8px" }}>
                 <Search style={{ width: "12px", height: "12px" }} /> search
