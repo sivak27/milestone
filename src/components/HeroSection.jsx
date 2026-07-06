@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { Search, TrendingUp, BarChart3, ArrowUpRight } from "lucide-react";
 import Logo1 from "/src/assets/1.png";
@@ -39,6 +39,7 @@ function FloatingCard({ styleOverrides = {}, delay = 0, children, parallax = 20,
 }
 
 export default function HeroSection() {
+  const [menuOpen, setMenuOpen] = useState(false); // Injected strictly for mobile dropdown management
   const containerRef = useRef(null);
   const mx = useMotionValue(0);
   const my = useMotionValue(0);
@@ -63,6 +64,7 @@ export default function HeroSection() {
   // JAVASCRIPT SMOOTH SCROLL MECHANISM
   const handleScrollToSection = (e, targetId) => {
     e.preventDefault();
+    setMenuOpen(false); // Closes dropdown tray immediately upon target selection
     const element = document.getElementById(targetId.toLowerCase());
     if (element) {
       const elementPosition = element.getBoundingClientRect().top + window.scrollY;
@@ -135,6 +137,47 @@ export default function HeroSection() {
         .marquee-container-loop img {
           height: 200px;
           width: auto;
+        }
+
+        /* Isolated Mobile Navigation Injection Rules */
+        .mobile-toggle-btn {
+          display: none;
+          background: none;
+          border: none;
+          cursor: pointer;
+          padding: 8px;
+        }
+        .mobile-toggle-btn span {
+          display: block;
+          width: 22px;
+          height: 2px;
+          background: #0E1412;
+          margin: 5px 0;
+          transition: 0.3s ease-in-out;
+        }
+        .mobile-toggle-btn.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .mobile-toggle-btn.active span:nth-child(2) { opacity: 0; }
+        .mobile-toggle-btn.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+        .mobile-nav-tray {
+          display: none;
+          flex-direction: column;
+          position: absolute;
+          top: 90px;
+          left: 0;
+          width: 100vw;
+          background: rgba(250, 253, 250, 0.96);
+          backdrop-filter: blur(20px);
+          WebkitBackdropFilter: blur(20px);
+          border-bottom: 1px solid rgba(14, 20, 18, 0.05);
+          box-sizing: border-box;
+          padding: 24px;
+          gap: 4px;
+        }
+        @media (max-width: 900px) {
+          .desktop-nav { display: none !important; }
+          .mobile-toggle-btn { display: block !important; }
+          .mobile-nav-tray.open { display: flex !important; }
         }
       `}</style>
       
@@ -223,6 +266,26 @@ export default function HeroSection() {
           ))}
         </nav>
 
+        {/* Mobile Toggle Trigger Button */}
+        <button className={`mobile-toggle-btn ${menuOpen ? "active" : ""}`} onClick={() => setMenuOpen(!menuOpen)}>
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        {/* Mobile Dropdown Menu Tray Overlay */}
+        <div className={`mobile-nav-tray ${menuOpen ? "open" : ""}`}>
+          {['Home', 'Philosophy', 'Services', 'Process', 'Work', 'Contact'].map((item) => (
+            <a 
+              key={item} 
+              href={`#${item.toLowerCase()}`}
+              onClick={(e) => handleScrollToSection(e, item)}
+              style={{ fontSize: "18px", fontWeight: 500, color: "#52525b", textDecoration: "none", padding: "14px 0" }}
+            >
+              {item}
+            </a>
+          ))}
+        </div>
         
       </header>
 
