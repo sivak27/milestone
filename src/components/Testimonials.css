@@ -11,9 +11,10 @@
         #f8faf8;
 }
 
-.testimonials-container{
-    width:min(1000px,90%);
-    margin:auto;
+.testimonials-container {
+    width: min(1000px, 90%);
+    margin: auto;
+    transform: translateX(-40px); /* Adjust this pixel value to nudge it exactly where you want it */
 }
 
 .eyebrow{

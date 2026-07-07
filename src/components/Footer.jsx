@@ -1,9 +1,11 @@
+import React from "react";
 import "./Footer.css";
 import {
   FaWhatsapp,
   FaInstagram,
   FaLinkedinIn,
 } from "react-icons/fa";
+import MilestoneLogo from "/src/assets/6.png"; // Imported your signature emerald crystal asset 
 
 export default function Footer() {
   return (
@@ -11,25 +13,35 @@ export default function Footer() {
 
       <div className="footer-top">
 
-        {/* Left */}
+        {/* Left Brand Segment */}
         <div className="footer-brand">
-          <div className="logo">
-            <span>MS</span>
+          <div className="logo" style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+            {/* UPDATED LOGO IMAGE INTERACTION (Blends into footer context smoothly) */}
+            <img 
+              src={MilestoneLogo} 
+              alt="Milestone Brand Logo" 
+              style={{ 
+                height: "44px", 
+                width: "44px", 
+                objectFit: "contain",
+                mixBlendMode: "multiply" /* Strips out white background elements instantly */
+              }} 
+            />
             <h3>MileStone</h3>
           </div>
 
-          <p>
+          <p style={{ marginTop: "16px" }}>
             A one-person growth practice for businesses
             that want measurable outcomes, not
             deliverables.
           </p>
         </div>
 
-        {/* Contact */}
+        {/* Contact info Segment */}
         <div className="footer-column">
           <h5>CONTACT</h5>
 
-          <a href="mailto:hari@growthstudio.com">
+          <a href="mailto:hariharan.growthpartner@gmail.com">
             hariharan.growthpartner@gmail.com
           </a>
 
@@ -38,7 +50,7 @@ export default function Footer() {
           </a>
         </div>
 
-        {/* Location */}
+        {/* Location info Segment */}
         <div className="footer-column">
           <h5>LOCATION</h5>
 
@@ -46,18 +58,18 @@ export default function Footer() {
           <p>Working globally</p>
         </div>
 
-        {/* Social */}
+        {/* Social Vector Icons Grid */}
         <div className="footer-social">
 
-          <a href="#">
+          <a href="#" aria-label="WhatsApp">
             <FaWhatsapp />
           </a>
 
-          <a href="#">
+          <a href="#" aria-label="Instagram">
             <FaInstagram />
           </a>
 
-          <a href="#">
+          <a href="#" aria-label="LinkedIn">
             <FaLinkedinIn />
           </a>
 

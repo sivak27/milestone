@@ -41,7 +41,7 @@ export default function Testimonials() {
   useEffect(() => {
     const interval = setInterval(() => {
       next();
-    }, 2000);
+    }, 4000); // Increased slightly to 4s so users have time to read
 
     return () => clearInterval(interval);
   }, []);
@@ -53,12 +53,10 @@ export default function Testimonials() {
       x: direction > 0 ? 120 : -120,
       opacity: 0,
     }),
-
     center: {
       x: 0,
       opacity: 1,
     },
-
     exit: (direction) => ({
       x: direction > 0 ? -120 : 120,
       opacity: 0,
@@ -71,7 +69,6 @@ export default function Testimonials() {
         <div className="testimonials-top">
           <div>
             <p className="eyebrow">IN THEIR WORDS</p>
-
             <h2 className="testimonial-title">
               Founders, in <span>their own words.</span>
             </h2>
@@ -81,7 +78,6 @@ export default function Testimonials() {
             <button onClick={prev}>
               <ChevronLeft size={18} />
             </button>
-
             <button onClick={next}>
               <ChevronRight size={18} />
             </button>
@@ -112,7 +108,6 @@ export default function Testimonials() {
               <div className="avatar">
                 {item.name.charAt(0)}
               </div>
-
               <div>
                 <h4>{item.name}</h4>
                 <span>{item.company}</span>
@@ -120,19 +115,6 @@ export default function Testimonials() {
             </div>
           </motion.div>
         </AnimatePresence>
-
-        <div className="testimonial-dots">
-          {testimonials.map((_, i) => (
-            <button
-              key={i}
-              className={current === i ? "active" : ""}
-              onClick={() => {
-                setDirection(i > current ? 1 : -1);
-                setCurrent(i);
-              }}
-            />
-          ))}
-        </div>
       </div>
     </section>
   );

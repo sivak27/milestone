@@ -126,7 +126,7 @@ export default function Growth() {
                 <p className="text-[13px] uppercase tracking-widest font-bold text-[#8A9590] mb-1">
                   Organic Traffic
                 </p>
-                <h3 className="text-5xl font-medium tracking-tight text-black mt-1">
+                <h3 className="text-3xl font-medium tracking-tight text-black mt-1">
                   {displayedTraffic.toLocaleString()}
                 </h3>
               </div>
@@ -192,7 +192,7 @@ export default function Growth() {
                 </p>
                 <div className="flex items-baseline space-x-2 mt-1">
                   {/* Displays hovered point value dynamically */}
-                  <h3 className="text-4xl font-bold tracking-tight text-white">
+                  <h3 className="text-3xl font-bold tracking-tight text-white">
                     {displayedEngagement}%
                   </h3>
                   <span style={{paddingLeft: '10px' }} className="text-[10px] text-[#6D7772]">vs 1.9% industry avg</span>
@@ -231,7 +231,7 @@ export default function Growth() {
                 </p>
                 <div className="flex items-baseline space-x-1 mt-1">
                   {/* Displays hovered bar value dynamically */}
-                  <h3 className="text-4xl font-bold tracking-tight text-black">
+                  <h3 className="text-3xl font-bold tracking-tight text-black">
                     {displayedLeads}
                   </h3>
                   <span className="text-xs text-[#8A9590] font-medium">/ mo</span>

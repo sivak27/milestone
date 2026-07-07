@@ -6,8 +6,8 @@ import Logo2 from "/src/assets/2.png";
 import Logo3 from "/src/assets/3.png";
 import Logo4 from "/src/assets/4.png";
 import Logo5 from "/src/assets/5.png";
+import MilestoneLogo from "/src/assets/6.png"; // Fixed name match to resolve the crash
 import "./HeroSection.css";
-
 
 function FloatingCard({ styleOverrides = {}, delay = 0, children, parallax = 20, mx, my }) {
   const tx = useTransform(mx, (v) => v * parallax);
@@ -39,7 +39,7 @@ function FloatingCard({ styleOverrides = {}, delay = 0, children, parallax = 20,
 }
 
 export default function HeroSection() {
-  const [menuOpen, setMenuOpen] = useState(false); // Injected strictly for mobile dropdown management
+  const [menuOpen, setMenuOpen] = useState(false);
   const containerRef = useRef(null);
   const mx = useMotionValue(0);
   const my = useMotionValue(0);
@@ -61,14 +61,13 @@ export default function HeroSection() {
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, [mx, my]);
 
-  // JAVASCRIPT SMOOTH SCROLL MECHANISM
   const handleScrollToSection = (e, targetId) => {
     e.preventDefault();
-    setMenuOpen(false); // Closes dropdown tray immediately upon target selection
+    setMenuOpen(false);
     const element = document.getElementById(targetId.toLowerCase());
     if (element) {
       const elementPosition = element.getBoundingClientRect().top + window.scrollY;
-      const offsetPosition = elementPosition - 90; // perfectly accounts for header height
+      const offsetPosition = elementPosition - 90;
 
       window.scrollTo({
         top: offsetPosition,
@@ -79,7 +78,7 @@ export default function HeroSection() {
 
   return (
     <div 
-      id="home" /* Pinned target for Home */
+      id="home"
       className="raw-font-sans"
       style={{ 
         minHeight: "100vh", 
@@ -139,7 +138,6 @@ export default function HeroSection() {
           width: auto;
         }
 
-        /* Isolated Mobile Navigation Injection Rules */
         .mobile-toggle-btn {
           display: none;
           background: none;
@@ -208,7 +206,8 @@ export default function HeroSection() {
           background: "radial-gradient(circle at 60% 40%, #B7E6CE 0%, #DFF4E8 50%, transparent 75%)"
         }}
       />
-{/* HEADER LAYER */}
+
+      {/* HEADER LAYER */}
       <header className="app-header"
         style={{ 
           position: "fixed",
@@ -229,14 +228,22 @@ export default function HeroSection() {
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-          <div style={{ width: "34px", height: "34px", borderRadius: "50%", backgroundColor: "#0E1412", color: "#fff", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: "700", fontSize: "13px" }}>MS</div>
+          <img 
+            src={MilestoneLogo} 
+            alt="Milestone Brand Logo" 
+            style={{ 
+              height: "44px", 
+              width: "44px", 
+              objectFit: "contain",
+              mixBlendMode: "multiply"
+            }} 
+          />
           <div style={{ display: "flex", flexDirection: "column" }}>
             <span style={{ fontWeight: 600, fontSize: "18px", color: "#0E1412", letterSpacing: "0.01em", lineHeight: 1 }}>MileStone</span>
             <span style={{ fontSize: "8px", color: "#9ca3af", fontWeight: "700", letterSpacing: "0.22em", textTransform: "uppercase", marginTop: "5px", lineHeight: 1 }}>EST. 2026</span>
           </div>
         </div>
         
-
         <nav className="desktop-nav"
           style={{ 
             position: "absolute",
@@ -244,11 +251,11 @@ export default function HeroSection() {
             transform: "translateX(-50%)",
             display: "flex",
             alignItems: "center",
-            gap: "4px", 
+            gap: "0px", 
             backgroundColor: "rgba(255, 255, 255, 0.85)", 
             border: "1px solid rgba(14, 20, 18, 0.05)", 
             borderRadius: "9999px", 
-            padding: "8px 24px",
+            padding: "4px 12px", 
             boxShadow: "0 2px 12px rgba(0,0,0,0.01)"
           }}
         >
@@ -257,7 +264,14 @@ export default function HeroSection() {
               key={item} 
               href={`#${item.toLowerCase()}`}
               onClick={(e) => handleScrollToSection(e, item)}
-              style={{ fontSize: "18px", fontWeight: 500, color: "#52525b", textDecoration: "none", padding: "6px 18px", transition: "color 0.2s" }}
+              style={{ 
+                fontSize: "15px", 
+                fontWeight: 500, 
+                color: "#52525b", 
+                textDecoration: "none", 
+                padding: "4px 10px", 
+                transition: "color 0.2s" 
+              }}
               onMouseEnter={(e) => e.target.style.color = "#000"}
               onMouseLeave={(e) => e.target.style.color = "#52525b"}
             >
@@ -286,7 +300,6 @@ export default function HeroSection() {
             </a>
           ))}
         </div>
-        
       </header>
 
       {/* STAGE CONTAINER */}
@@ -296,25 +309,25 @@ export default function HeroSection() {
           position: "relative",
           width: "100%",
           maxWidth: "1440px",
-          padding: "160px 80px 80px 80px",
+          padding: "90px 70px 70px 70px",
           zIndex: 10,
           display: "flex",
           flexDirection: "row",
           alignItems: "center",
-          justifyContent: "space-between",
+          justifyContent: "center", 
+          gap: "16px",
           boxSizing: "border-box"
         }}
       >
         {/* Left Side Content Area */}
-        <motion.div className="hero-left" style={{ x: leftX, display: "flex", flexDirection: "column", alignItems: "flex-start", width: "50%", boxSizing: "border-box" }}>
+        <motion.div className="hero-left" style={{ x: leftX, display: "flex", flexDirection: "column", alignItems: "flex-start", width: "46%", boxSizing: "border-box" }}>
           
-          <div style={{ display: "inline-flex", alignItems: "center", gap: "8px", backgroundColor: "#edf7ed", border: "1px solid #d2ebd2", padding: "5px 14px", borderRadius: "9999px", fontSize: "10px", fontWeight: "700", color: "#1e5631", marginBottom: "28px", letterSpacing: "0.06em" }}>
-            <span style={{ width: "6px", height: "6px", borderRadius: "50%", backgroundColor: "#10b981" }} />
+          <div style={{ display: "inline-flex", alignItems: "center", gap: "8px", backgroundColor: "#edf7ed", border: "1px solid #d2ebd2", padding: "5px 14px", borderRadius: "9999px", fontSize: "10px", fontWeight: "700", color: "#1e5631", marginBottom: "14px", letterSpacing: "0.06em" }}>
+            <span style={{ width: "6px", height: "4px", borderRadius: "50%", backgroundColor: "#10b981" }} />
             AVAILABLE FOR Q3 — 2 SPOTS LEFT
           </div>
 
           <div>
-            {/* Cleaned up Heading: IDs REMOVED from the internal word lines */}
             <h1 
               className="raw-font-serif hero-title" 
               style={{ 
@@ -370,71 +383,97 @@ export default function HeroSection() {
           </div>
         </motion.div>
 
-        {/* Right Side Cards Layer */}
-        <motion.div className="hero-right"
-          style={{ x: rightX, position: "relative", width: "45%", height: "540px", display: "flex", alignItems: "center", justifyContent: "center", boxSizing: "border-box" }}
+        {/* Right Side Visual Canvas Frame Layout */}
+        <motion.div 
+          style={{ 
+            x: rightX, 
+            position: "relative", 
+            width: "50%", 
+            height: "640px", 
+            display: "flex", 
+            alignItems: "center", 
+            justifyContent: "center", 
+            boxSizing: "border-box",
+            marginLeft: "-50px" 
+          }}
         >
+          {/* Geometrical Orbit Backdrop Mapping */}
           <div style={{ position: "absolute", inset: 0, display: "grid", placeItems: "center", pointerEvents: "none", zIndex: 0 }}>
-            <div style={{ position: "relative", width: "440px", height: "440px", borderRadius: "50%", border: "1px solid rgba(14,20,18,0.04)" }}>
-              <div style={{ position: "absolute", inset: "70px", borderRadius: "50%", border: "1px solid rgba(14,20,18,0.02)" }} />
-              <div style={{ position: "absolute", inset: "140px", borderRadius: "50%", border: "1px solid rgba(14,20,18,0.015)" }} />
+            <div style={{ position: "relative", width: "520px", height: "520px", borderRadius: "50%", border: "1px solid rgba(75, 85, 99, 0.15)" }}>
+              <div style={{ position: "absolute", inset: "85px", borderRadius: "50%", border: "1px solid rgba(75, 85, 99, 0.12)" }} />
+              <div style={{ position: "absolute", inset: "170px", borderRadius: "50%", border: "1px solid rgba(75, 85, 99, 0.08)" }} />
               
               <div className="animate-orbit-custom-cw" style={{ position: "absolute", inset: 0 }}>
-                <span style={{ position: "absolute", top: 0, left: "50%", transform: "translate(-50%, -50%)", width: "10px", height: "10px", borderRadius: "50%", backgroundColor: "#34d399", boxShadow: "0 2px 6px rgba(52,211,153,0.2)" }} />
+                <span style={{ position: "absolute", top: 0, left: "50%", transform: "translate(-50%, -50%)", width: "12px", height: "12px", borderRadius: "50%", backgroundColor: "#4b5563", boxShadow: "0 2px 8px rgba(75, 85, 99, 0.25)" }} />
               </div>
-              <div className="animate-orbit-custom-ccw" style={{ position: "absolute", inset: "70px" }}>
-                <span style={{ position: "absolute", top: 0, left: "50%", transform: "translate(-50%, -50%)", width: "6px", height: "6px", borderRadius: "50%", backgroundColor: "#a1a1aa" }} />
+              <div className="animate-orbit-custom-ccw" style={{ position: "absolute", inset: "85px" }}>
+                <span style={{ position: "absolute", top: 0, left: "50%", transform: "translate(-50%, -50%)", width: "8px", height: "8px", borderRadius: "50%", backgroundColor: "#6b7280" }} />
               </div>
             </div>
           </div>
 
-          <div style={{ position: "absolute", width: "460px", height: "480px", zIndex: 10 }}>
-            <FloatingCard mx={springX} my={springY} delay={0.2} parallax={-15} styleOverrides={{ top: 0, left: 0, width: "200px" }}>
-              <div style={{ display: "flex", alignItems: "center", gap: "6px", fontSize: "9px", color: "#a1a1aa", fontWeight: "700", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: "8px" }}>
-                <Search style={{ width: "12px", height: "12px" }} /> search
+          {/* Hardbound Canvas Window Frame */}
+          <div style={{ position: "absolute", width: "540px", height: "560px", zIndex: 10 }}>
+
+            {/* Card 1: Organic Search Metrics Dashboard */}
+            <FloatingCard mx={springX} my={springY} delay={0.2} parallax={-15} styleOverrides={{ top: 0, left: "-20px", width: "230px" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "6px", fontSize: "10px", color: "#a1a1aa", fontWeight: "700", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: "10px" }}>
+                <Search style={{ width: "13px", height: "12px" }} /> search
               </div>
-              <div style={{ fontSize: "26px", fontWeight: 600, color: "#0E1412", letterSpacing: "-0.01em" }}>35x</div>
-              <div style={{ marginTop: "16px", display: "flex", alignItems: "flex-end", gap: "4px", height: "45px" }}>
+              <div style={{ fontSize: "30px", fontWeight: 600, color: "#0E1412", letterSpacing: "-0.01em" }}>35x</div>
+              <div style={{ marginTop: "20px", display: "flex", alignItems: "flex-end", gap: "5px", height: "55px" }}>
                 {[25, 35, 25, 55, 40, 72, 85, 100].map((h, i) => (
                   <div key={i} style={{ flex: 1, borderRadius: "999px", height: `${h}%`, background: "linear-gradient(to top, rgba(163,229,201,0.5), #71cdab)" }} />
                 ))}
               </div>
             </FloatingCard>
 
-            <FloatingCard mx={springX} my={springY} delay={0.3} parallax={14} styleOverrides={{ top: "40px", right: "-20px", width: "250px" }}>
-              <div style={{ display: "flex", alignItems: "center", justifyInbound: "space-between", marginBottom: "10px" }}>
-                <span style={{ fontSize: "9px", color: "#a1a1aa", fontWeight: "700", textTransform: "uppercase", letterSpacing: "0.06em" }}>Conversions</span>
-                <span style={{ backgroundColor: "#eef7ee", color: "#047857", fontWeight: 800, fontSize: "8px", letterSpacing: "0.08em", padding: "2px 8px", borderRadius: "999px" }}>LIVE</span>
+            {/* Card 2: Conversions Realtime Line Streaming Chart */}
+            <FloatingCard mx={springX} my={springY} delay={0.3} parallax={14} styleOverrides={{ top: "50px", right: "-40px", width: "290px" }}>
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "12px" }}>
+                <span style={{ fontSize: "10px", color: "#a1a1aa", fontWeight: "700", textTransform: "uppercase", letterSpacing: "0.06em" }}>Conversions</span>
+                <span style={{ backgroundColor: "#eef7ee", color: "#047857", fontWeight: 800, fontSize: "9px", letterSpacing: "0.08em", padding: "2px 10px", borderRadius: "9999px" }}>LIVE</span>
               </div>
-              <div style={{ fontSize: "26px", fontWeight: 600, color: "#0E1412", letterSpacing: "-0.01em" }}>2,841</div>
-              <svg viewBox="0 0 200 55" style={{ width: "100%", marginTop: "14px", overflow: "visible" }}>
+              <div style={{ fontSize: "30px", fontWeight: 600, color: "#0E1412", letterSpacing: "-0.01em" }}>2,841</div>
+              
+              <svg viewBox="0 0 200 55" style={{ width: "100%", marginTop: "16px", overflow: "visible" }}>
                 <defs>
                   <linearGradient id="chartCanvasFillRef" x1="0" x2="0" y1="0" y2="1">
-                    <stop offset="0%" stopColor="#7CC7A5" stopOpacity="0.25" />
-                    <stop offset="100%" stopColor="#7CC7A5" stopOpacity="0" />
+                    <stop offset="0%" stopColor="#10b981" stopOpacity="0.35" />
+                    <stop offset="100%" stopColor="#10b981" stopOpacity="0" />
                   </linearGradient>
                 </defs>
                 <path d="M0,45 L20,38 L40,41 L60,25 L80,29 L100,18 L120,22 L140,10 L160,14 L180,5 L200,2 L200,55 L0,55 Z" fill="url(#chartCanvasFillRef)" />
-                <path d="M0,45 L20,38 L40,41 L60,25 L80,29 L100,18 L120,22 L140,10 L160,14 L180,5 L200,2" fill="none" stroke="#121815" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                <path 
+                  d="M0,45 L20,38 L40,41 L60,25 L80,29 L100,18 L120,22 L140,10 L160,14 L180,5 L200,2" 
+                  fill="none" 
+                  stroke="#10b981" 
+                  strokeWidth="2.5" 
+                  strokeLinecap="round" 
+                  strokeLinejoin="round" 
+                />
               </svg>
             </FloatingCard>
 
-            <FloatingCard mx={springX} my={springY} delay={0.4} parallax={-10} styleOverrides={{ bottom: "10px", left: "20px", width: "230px" }}>
-              <div style={{ display: "flex", alignItems: "center", gap: "6px", fontSize: "9px", color: "#a1a1aa", fontWeight: "700", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: "8px" }}>
-                <BarChart3 style={{ width: "12px", height: "12px" }} /> Monthly leads
+            {/* Card 3: Inbound Targets Monthly Metric Progress Slider */}
+            <FloatingCard mx={springX} my={springY} delay={0.4} parallax={-10} styleOverrides={{ bottom: "-20px", left: "0px", width: "260px" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "6px", fontSize: "10px", color: "#a1a1aa", fontWeight: "700", textTransform: "uppercase", letterSpacing: "0.06em", marginBottom: "10px" }}>
+                <BarChart3 style={{ width: "14px", height: "14px" }} /> Monthly leads
               </div>
-              <div style={{ fontSize: "26px", fontWeight: 600, color: "#0E1412", letterSpacing: "-0.01em" }}>+60%</div>
-              <div style={{ marginTop: "14px", height: "6px", borderRadius: "999px", backgroundColor: "#f4f4f5", overflow: "hidden" }}>
+              <div style={{ fontSize: "30px", fontWeight: 600, color: "#0E1412", letterSpacing: "-0.01em" }}>+60%</div>
+              <div style={{ marginTop: "16px", height: "7px", borderRadius: "999px", backgroundColor: "#f4f4f5", overflow: "hidden" }}>
                 <div style={{ height: "100%", backgroundColor: "#0E1412", borderRadius: "999px", width: "60%" }} />
               </div>
             </FloatingCard>
 
-            <FloatingCard mx={springX} my={springY} delay={0.5} parallax={10} styleOverrides={{ bottom: "100px", right: "0px", padding: "14px 18px", width: "150px" }}>
-              <div style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "13px", fontWeight: 500 }}>
-                <TrendingUp style={{ width: "15px", height: "15px", color: "#10b981" }} />
-                <span style={{ color: "#424242", fontSize: "11px" }}>CAC <span style={{ color: "#047857", fontWeight: "700" }}>↓ 38%</span></span>
+            {/* Card 4: Acquisition Reduction Target Badge Overlay */}
+            <FloatingCard mx={springX} my={springY} delay={0.5} parallax={10} styleOverrides={{ bottom: "100px", right: "-10px", padding: "16px 22px", width: "170px" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "8px", fontSize: "14px", fontWeight: 500 }}>
+                <TrendingUp style={{ width: "16px", height: "16px", color: "#10b981" }} />
+                <span style={{ color: "#424242", fontSize: "12px" }}>CAC <span style={{ color: "#047857", fontWeight: "700" }}>↓ 38%</span></span>
               </div>
             </FloatingCard>
+
           </div>
         </motion.div>
       </section>
@@ -447,9 +486,9 @@ export default function HeroSection() {
           borderBottom: "1px solid rgba(14, 20, 18, 0.06)",
           padding: "32px 0",
           overflow: "hidden",
-          backgroundColor: "rgba(255, 255, 255, 0.4)",
+          backgroundColor: "transparent", 
           backdropFilter: "blur(8px)",
-          marginTop: "30px",
+          marginTop: "25px",
           width: "100vw"
         }}
       >
@@ -463,18 +502,10 @@ export default function HeroSection() {
                   alt="Brand Partner Logo"
                   style={{
                     objectFit: "contain",
-                    filter: "grayscale(100%)",
-                    opacity: 0.5,
+                    filter: "none", 
+                    opacity: 1,      
                     transition: "all 0.3s ease",
                     boxSizing: "content-box"
-                  }}
-                  onMouseEnter={(e) => {
-                    e.target.style.filter = "grayscale(0%)";
-                    e.target.style.opacity = "1";
-                  }}
-                  onMouseLeave={(e) => {
-                    e.target.style.filter = "grayscale(100%)";
-                    e.target.style.opacity = "0.5";
                   }}
                 />
               ))}
