@@ -231,7 +231,7 @@ export default function Growth() {
                 </p>
                 <div className="flex items-baseline space-x-1 mt-1">
                   {/* Displays hovered bar value dynamically */}
-                  <h3 className="text-3xl font-bold tracking-tight text-black">
+                  <h3 className="text-xl font-bold tracking-tight text-black">
                     {displayedLeads}
                   </h3>
                   <span className="text-xs text-[#8A9590] font-medium">/ mo</span>

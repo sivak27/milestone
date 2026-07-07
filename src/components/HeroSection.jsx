@@ -6,7 +6,7 @@ import Logo2 from "/src/assets/2.png";
 import Logo3 from "/src/assets/3.png";
 import Logo4 from "/src/assets/4.png";
 import Logo5 from "/src/assets/5.png";
-import MilestoneLogo from "/src/assets/6.png"; // Fixed name match to resolve the crash
+import MilestoneLogo from "/src/assets/6.png"; 
 import "./HeroSection.css";
 
 function FloatingCard({ styleOverrides = {}, delay = 0, children, parallax = 20, mx, my }) {
@@ -172,10 +172,20 @@ export default function HeroSection() {
           padding: 24px;
           gap: 4px;
         }
+
+        /* UPDATED RESPONSIVE MOBILE SCALING FOR THE RIGHT CONTAINER ONLY */
         @media (max-width: 900px) {
           .desktop-nav { display: none !important; }
           .mobile-toggle-btn { display: block !important; }
           .mobile-nav-tray.open { display: flex !important; }
+          
+          /* Scales down the right card animation canvas for small viewports */
+          .responsive-cards-container {
+            transform: scale(0.7) !important;
+            transform-origin: center center;
+            height: 480px !important; /* Adjust height bounds to avoid structural collision */
+            margin-left: 0px !important;
+          }
         }
       `}</style>
       
@@ -383,8 +393,9 @@ export default function HeroSection() {
           </div>
         </motion.div>
 
-        {/* Right Side Visual Canvas Frame Layout */}
+        {/* Right Side Visual Canvas Frame Layout (ADDED: responsive-cards-container class) */}
         <motion.div 
+          className="responsive-cards-container"
           style={{ 
             x: rightX, 
             position: "relative", 

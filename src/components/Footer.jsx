@@ -41,8 +41,8 @@ export default function Footer() {
         <div className="footer-column">
           <h5>CONTACT</h5>
 
-          <a href="mailto:hariharan.growthpartner@gmail.com">
-            hariharan.growthpartner@gmail.com
+          <a href="mailto:milestonesdigitalmarketing@gmail.com">
+            milestonesdigitalmarketing@gmail.com
           </a>
 
           <a href="tel:+919344260752">

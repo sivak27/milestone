@@ -181,3 +181,76 @@ font-size:22px;
 }
 
 }
+
+
+
+/* ==========================================
+   MOBILE & RESPONSIVE OVERRIDES ONLY
+   ========================================== */
+
+@media (max-width: 900px) {
+  .testimonials {
+    padding: 60px 0;
+    max-height: none; /* Allows natural height for mobile content stacking */
+  }
+
+  /* Reset the negative translation so the container doesn't shift off-screen */
+  .testimonials-container {
+    width: 90%;
+    margin: 0 auto;
+    transform: none; 
+  }
+
+  .testimonials-top {
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 35px;
+  }
+
+  .testimonial-nav {
+    margin-top: 10px;
+  }
+
+  /* Compact the padding and dimensions of the card */
+  .testimonial-card {
+    padding: 40px 24px;
+    max-height: none; /* Prevents text overflow cutting off */
+    border-radius: 24px;
+  }
+
+  .quote-icon {
+    width: 36px;
+    height: 36px;
+    margin-bottom: 20px;
+  }
+
+  /* Dynamic fluid typography for the quote */
+  .testimonial-text {
+    font-size: clamp(1.35rem, 4.5vw, 1.75rem);
+    line-height: 1.3;
+    max-width: 100%;
+  }
+
+  .testimonial-author {
+    margin-top: 35px;
+  }
+}
+
+/* Extra optimization for small smartphones */
+@media (max-width: 480px) {
+  .testimonials {
+    padding: 50px 0;
+  }
+
+  .testimonials-container {
+    width: 92%; /* Slightly wider to maximize real estate on tiny screens */
+  }
+
+  .testimonial-card {
+    padding: 30px 20px;
+  }
+
+  .testimonial-title {
+    font-size: 2rem;
+  }
+}

@@ -115,3 +115,40 @@ body {
             height: 120px !important;
           }
         }
+/* UPDATED RESPONSIVE MOBILE SCALING & ABSOLUTE CENTERING ENGINE */
+        @media (max-width: 900px) {
+          .desktop-nav { display: none !important; }
+          .mobile-toggle-btn { display: block !important; }
+          .mobile-nav-tray.open { display: flex !important; }
+          
+          /* FORCE-CENTERS THE ENTIRE CARDS BLOCK HORIZONTALLY AND VERTICALLY */
+          .hero-stage {
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: center !important;
+            align-items: center !important;
+            padding: 80px 20px 40px 20px !important;
+          }
+
+          /* Shrunk down more (0.45) and centered perfectly on the mobile stage */
+          .responsive-cards-container {
+            transform: scale(0.45) !important; /* Reduced to 0.45 for an ultra-compact presentation */
+            transform-origin: center center !important;
+            height: 320px !important; /* Scaled down height boundary to match */
+            margin-left: 0px !important; /* Cleared out layout offsets to avoid side pushing */
+            position: relative !important;
+            display: flex !important;
+            justify-content: center !important;
+            align-items: center !important;
+            width: 100% !important;
+          }
+
+          /* ENSURES CONCENTRIC BACKDROP CIRCLES STAY LOCKED IN DEAD CENTER OVER CARDS */
+          .responsive-cards-container > div:first-child {
+            top: 50% !important;
+            left: 50% !important;
+            transform: translate(-50%, -50%) !important;
+            width: 100% !important;
+            height: 100% !important;
+          }
+        }
