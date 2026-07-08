@@ -23,51 +23,39 @@ const teamData = [
     id: 1,
     name: "Goku",
     role: "Design Director",
+    company: "MileStone Digital Marketing",
     image: "https://i.pinimg.com/originals/fc/4b/77/fc4b77859b2b5fb842c43421dfa045f4.jpg",
-    bio: "Elena brings over a decade of experience in crafting digital experiences that merge high-end aesthetics with seamless usability. Her approach is rooted in the belief that design should be as functional as it is beautiful.\n\nPreviously leading design at top-tier agencies in London, she now shapes the visual language of our most ambitious projects, ensuring every pixel serves a purpose.",
-    skills: ["UI/UX Design", "Framer", "Art Direction", "Motion"],
-    experience: "10+ Years",
-    projects: "85+",
-    location: "London, UK",
+    socials: { linkedin: "#", github: "#", email: "mailto:goku@milestone.com" }
   },
   {
     id: 2,
     name: "NaMi",
     role: "Lead Frontend Engineer",
+    company: "MileStone Digital Marketing",
     image: "https://image.cdn2.seaart.me/2024-01-28/cmr9f25e878c7387vutg/aa3a270cff2005961953a5d358c3eb80ab66cfca_high.webp",
-    bio: "Marcus bridges the gap between intricate design and flawless execution. With a deep passion for modern web technologies, he architects scalable, performant interfaces that feel effortless to use.\n\nHis obsessive attention to detail ensures that complex animations and micro-interactions run smoothly across all devices, bringing static concepts to life.",
-    skills: ["React", "TypeScript", "Next.js", "WebGL"],
-    experience: "7 Years",
-    projects: "60+",
-    location: "Toronto, CA",
+    socials: { linkedin: "#", github: "#", email: "mailto:nami@milestone.com" }
   },
   {
     id: 3,
     name: "Satoru Gojo",
     role: "Head of Strategy",
+    company: "MileStone Digital Marketing",
     image: "https://thfvnext.bing.com/th/id/OIP.ilowuWKtewHF40OGYanCVgHaHa?r=0&o=7&cb=thfvnextfalcon4rm=3&rs=1&pid=ImgDetMain&o=7&rm=3",
-    bio: "Aisha is the analytical mind driving our creative endeavors. She specializes in untangling complex business problems and translating them into clear, actionable digital roadmaps.\n\nBy combining market research with user psychology, she ensures that every product we build not only looks exceptional but directly achieves our clients' core business objectives.",
-    skills: ["Product Strategy", "User Research", "Agile", "Data Analysis"],
-    experience: "8 Years",
-    projects: "50+",
-    location: "New York, USA",
+    socials: { linkedin: "#", github: "#", email: "mailto:gojo@milestone.com" }
   },
   {
-    id: 4, // Must be a unique number
-    name: "Naruto uzumaki",
+    id: 4,
+    name: "Naruto Uzumaki",
     role: "Senior Backend Engineer",
+    company: "MileStone Digital Marketing",
     image: "https://www.pngplay.com/wp-content/uploads/12/Naruto-Kid-Transparent-File.png",
-    bio: "David is the architect behind our robust server infrastructure. He specializes in designing secure, high-performance APIs that power our front-end experiences.\n\nWhen he isn't optimizing database queries, he's actively contributing to open-source Node.js projects.",
-    skills: ["Node.js", "PostgreSQL", "AWS", "System Design"],
-    experience: "6 Years",
-    projects: "40+",
-    location: "Seoul, KR",
+    socials: { linkedin: "#", github: "#", email: "mailto:naruto@milestone.com" }
   }
 ];
 
 const slideVariants = {
   enter: (direction) => ({
-    x: direction > 0 ? 40 : -40,
+    x: direction > 0 ? 50 : -50,
     opacity: 0,
   }),
   center: {
@@ -77,7 +65,7 @@ const slideVariants = {
   },
   exit: (direction) => ({
     zIndex: 0,
-    x: direction < 0 ? 40 : -40,
+    x: direction < 0 ? 50 : -50,
     opacity: 0,
   }),
 };
@@ -93,10 +81,10 @@ const Team = () => {
     const timer = setInterval(() => {
       setDirection(1);
       setCurrentIndex((prevIndex) => (prevIndex === teamData.length - 1 ? 0 : prevIndex + 1));
-    }, 3000);
+    }, 4000);
 
     return () => clearInterval(timer);
-  }, [isHovered, currentIndex]);
+  }, [isHovered]);
 
   const paginate = (newDirection) => {
     setDirection(newDirection);
@@ -132,8 +120,8 @@ const Team = () => {
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-        <div className="card-wrapper">
-          <AnimatePresence initial={false} custom={direction} mode="wait">
+        <div className="card-wrapper" style={{ position: "relative", overflow: "hidden" }}>
+          <AnimatePresence initial={false} custom={direction} mode="popLayout">
             <motion.div
               key={currentIndex}
               custom={direction}
@@ -141,7 +129,7 @@ const Team = () => {
               initial="enter"
               animate="center"
               exit="exit"
-              transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.5, ease: [0.25, 1, 0.5, 1] }}
               className="team-card"
             >
               <div className="card-left">
@@ -153,16 +141,23 @@ const Team = () => {
                   />
                 </div>
                 
-                {/* Mobile/Tablet Details (Hidden on Desktop) */}
+                {/* Mobile/Tablet Details */}
                 <div className="mobile-member-info">
                   <h3>{currentMember.name}</h3>
                   <span className="role">{currentMember.role}</span>
+                  <span className="company">{currentMember.company}</span>
                 </div>
 
                 <div className="social-links">
-                  <a href="#" aria-label="LinkedIn" className="social-icon"><LinkedinIcon size={20} /></a>
-                  <a href="#" aria-label="GitHub" className="social-icon"><GithubIcon size={20} /></a>
-                  <a href="#" aria-label="Email" className="social-icon"><Mail size={20} /></a>
+                  <a href={currentMember.socials.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn" className="social-icon">
+                    <LinkedinIcon size={20} />
+                  </a>
+                  <a href={currentMember.socials.github} target="_blank" rel="noreferrer" aria-label="GitHub" className="social-icon">
+                    <GithubIcon size={20} />
+                  </a>
+                  <a href={currentMember.socials.email} aria-label="Email" className="social-icon">
+                    <Mail size={20} />
+                  </a>
                 </div>
               </div>
 
@@ -171,33 +166,7 @@ const Team = () => {
                 <div className="desktop-member-info">
                   <h3>{currentMember.name}</h3>
                   <span className="role">{currentMember.role}</span>
-                </div>
-
-                <div className="bio">
-                  {currentMember.bio.split('\n\n').map((paragraph, idx) => (
-                    <p key={idx}>{paragraph}</p>
-                  ))}
-                </div>
-
-                <div className="skills-container">
-                  {currentMember.skills.map((skill, idx) => (
-                    <span key={idx} className="skill-chip">{skill}</span>
-                  ))}
-                </div>
-
-                <div className="stats-container">
-                  <div className="stat-item">
-                    <span className="stat-label">Experience</span>
-                    <span className="stat-value">{currentMember.experience}</span>
-                  </div>
-                  <div className="stat-item">
-                    <span className="stat-label">Projects</span>
-                    <span className="stat-value">{currentMember.projects}</span>
-                  </div>
-                  <div className="stat-item">
-                    <span className="stat-label">Location</span>
-                    <span className="stat-value">{currentMember.location}</span>
-                  </div>
+                  <span className="company">{currentMember.company}</span>
                 </div>
               </div>
             </motion.div>

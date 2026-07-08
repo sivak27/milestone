@@ -498,8 +498,6 @@ export default function HeroSection() {
           borderBottom: "1px solid rgba(14, 20, 18, 0.06)",
           padding: "32px 0",
           overflow: "hidden",
-          backgroundColor: "transparent", 
-          backdropFilter: "blur(8px)",
           marginTop: "25px",
           width: "100vw"
         }}
