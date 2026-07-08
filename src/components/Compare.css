@@ -9,7 +9,7 @@
 
 .compare-container {
   width: min(1200px, 90%);
-  margin: 0 auto;
+  margin-left: 100px;
   box-sizing: border-box;
 }
 
@@ -163,6 +163,9 @@
   .compare-header {
     display: none;
   }
+  compare-container {
+    margin: 0 auto;
+  } 
   .floating-row-card {
     grid-template-columns: 1fr;
     gap: 0;

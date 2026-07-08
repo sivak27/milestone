@@ -97,7 +97,7 @@ export default function Growth() {
 
   return (
     <section className="w-full bg-[#F8F9F6] py-16 px-6 md:px-12 flex items-center justify-center font-sans antialiased select-none">
-      <div className="w-full max-w-6xl">
+      <div className="w-full max-w-7xl">
         
         {/* --- SECTION HEADER --- */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-12 w-full">

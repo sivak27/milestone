@@ -65,7 +65,7 @@ export default function Footer() {
             <FaWhatsapp />
           </a>
 
-          <a href="#" aria-label="Instagram">
+          <a href="https://www.instagram.com/milestone_digitalmarketing?igsh=MXA3ZzRpZXVpZjNnZA==" aria-label="Instagram">
             <FaInstagram />
           </a>
 

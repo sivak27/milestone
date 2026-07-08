@@ -13,7 +13,7 @@
 
 .testimonials-container {
     width: min(1000px, 90%);
-    margin: auto;
+    margin-left: 200px;
     transform: translateX(-40px); /* Adjust this pixel value to nudge it exactly where you want it */
 }
 

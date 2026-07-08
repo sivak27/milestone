@@ -387,7 +387,7 @@ export default function HeroSection() {
             
             {/* UPDATED: Dynamic toggle behavior based on viewport size */}
             <a 
-              href={isMobile ? "tel:+919344260752" : "https://wa.me/qr/5ZS2CQIYHATWE1"} 
+              href={isMobile ? "tel:+919344260752" : "https://api.whatsapp.com/send/?phone=919344260752&text=Hi+I+visited+your+website.&type=phone_number&app_absent=0"} 
               target={isMobile ? "_self" : "_blank"} 
               rel="noopener noreferrer" 
               style={{ backgroundColor: "#fff", color: "#0E1412", padding: "14px 24px", borderRadius: "9999px", fontSize: "15px", fontWeight: 500, textDecoration: "none", border: "1px solid #e4e4e7" }}
