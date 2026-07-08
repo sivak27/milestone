@@ -373,7 +373,12 @@ export default function HeroSection() {
             <a href="#work" onClick={(e) => handleScrollToSection(e, "work")} style={{ backgroundColor: "#0E1412", color: "#fff", padding: "14px 24px", borderRadius: "9999px", fontSize: "15px", fontWeight: 500, textDecoration: "none", display: "flex", alignItems: "center", gap: "8px", boxShadow: "0 4px 12px rgba(0,0,0,0.05)" }}>
               See growth stories <ArrowUpRight style={{ width: "15px", height: "15px" }} />
             </a>
-            <a href="#contact" onClick={(e) => handleScrollToSection(e, "contact")} style={{ backgroundColor: "#fff", color: "#0E1412", padding: "14px 24px", borderRadius: "9999px", fontSize: "15px", fontWeight: 500, textDecoration: "none", border: "1px solid #e4e4e7" }}>
+            <a 
+              href="https://wa.me/qr/5ZS2CQIYHATWE1" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              style={{ backgroundColor: "#fff", color: "#0E1412", padding: "14px 24px", borderRadius: "9999px", fontSize: "15px", fontWeight: 500, textDecoration: "none", border: "1px solid #e4e4e7" }}
+            >
               Book a call
             </a>
           </div>
@@ -473,7 +478,7 @@ export default function HeroSection() {
               </div>
               <div style={{ fontSize: "30px", fontWeight: 600, color: "#0E1412", letterSpacing: "-0.01em" }}>+60%</div>
               <div style={{ marginTop: "16px", height: "7px", borderRadius: "999px", backgroundColor: "#f4f4f5", overflow: "hidden" }}>
-                <div style={{ height: "100%", backgroundColor: "#0E1412", borderRadius: "999px", width: "60%" }} />
+                <div style={{ height: "100%", backgroundColor: "#0E1412", borderRadius: "9999px", width: "60%" }} />
               </div>
             </FloatingCard>
 
