@@ -384,7 +384,7 @@ export default function HeroSection() {
             {[
               { num: "3.5+", label: "Years building" },
               { num: "15+", label: "Brands scaled" },
-              { num: "99%", label: "Client retention" },
+              { num: "90%", label: "Client retention" },
             ].map((stat) => (
               <div key={stat.label} style={{ display: "flex", flexDirection: "column" }}>
                 <div style={{ fontSize: "28px", fontWeight: 600, color: "#0E1412", letterSpacing: "-0.02em", lineHeight: 1 }}>{stat.num}</div>
