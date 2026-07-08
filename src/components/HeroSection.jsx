@@ -40,6 +40,7 @@ function FloatingCard({ styleOverrides = {}, delay = 0, children, parallax = 20,
 
 export default function HeroSection() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false); // Track mobile viewport state
   const containerRef = useRef(null);
   const mx = useMotionValue(0);
   const my = useMotionValue(0);
@@ -50,6 +51,7 @@ export default function HeroSection() {
   const rightX = useTransform(springX, (v) => v * -10);
 
   useEffect(() => {
+    // Handle both mouse move and screen resizing responsively
     const handleMouseMove = (e) => {
       const element = containerRef.current;
       if (!element) return;
@@ -57,8 +59,21 @@ export default function HeroSection() {
       mx.set(((e.clientX - rect.left) / rect.width - 0.5) * 2);
       my.set(((e.clientY - rect.top) / rect.height - 0.5) * 2);
     };
+
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 900); // Syncs directly with your CSS breakpoint
+    };
+
+    // Initial run
+    handleResize();
+
     window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
+    window.addEventListener("resize", handleResize);
+    
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("resize", handleResize);
+    };
   }, [mx, my]);
 
   const handleScrollToSection = (e, targetId) => {
@@ -369,9 +384,11 @@ export default function HeroSection() {
             <a href="#work" onClick={(e) => handleScrollToSection(e, "work")} style={{ backgroundColor: "#0E1412", color: "#fff", padding: "14px 24px", borderRadius: "9999px", fontSize: "15px", fontWeight: 500, textDecoration: "none", display: "flex", alignItems: "center", gap: "8px", boxShadow: "0 4px 12px rgba(0,0,0,0.05)" }}>
               See growth stories <ArrowUpRight style={{ width: "15px", height: "15px" }} />
             </a>
+            
+            {/* UPDATED: Dynamic toggle behavior based on viewport size */}
             <a 
-              href="https://wa.me/qr/5ZS2CQIYHATWE1" 
-              target="_blank" 
+              href={isMobile ? "tel:+919344260752" : "https://wa.me/qr/5ZS2CQIYHATWE1"} 
+              target={isMobile ? "_self" : "_blank"} 
               rel="noopener noreferrer" 
               style={{ backgroundColor: "#fff", color: "#0E1412", padding: "14px 24px", borderRadius: "9999px", fontSize: "15px", fontWeight: 500, textDecoration: "none", border: "1px solid #e4e4e7" }}
             >
