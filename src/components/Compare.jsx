@@ -42,7 +42,7 @@ export default function ComparisonSection() {
           <div className="compare-header">
             <div>Core Metric</div>
             <div>Typical Freelancer</div>
-            <div className="partner-glow-header">Kaizen Growth Partner</div>
+            <div className="partner-glow-header">MileStone Digital Marketing</div>
           </div>
 
           {/* Mapping rows out as separate modular card elements */}

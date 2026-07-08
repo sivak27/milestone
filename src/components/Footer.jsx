@@ -61,7 +61,7 @@ export default function Footer() {
         {/* Social Vector Icons Grid */}
         <div className="footer-social">
 
-          <a href="#" aria-label="WhatsApp">
+          <a href="https://wa.me/qr/5ZS2CQIYHATWE1" aria-label="WhatsApp">
             <FaWhatsapp />
           </a>
 
@@ -69,7 +69,7 @@ export default function Footer() {
             <FaInstagram />
           </a>
 
-          <a href="#" aria-label="LinkedIn">
+          <a href="https://www.linkedin.com/in/milestone-digital-marketing" aria-label="LinkedIn">
             <FaLinkedinIn />
           </a>
 
