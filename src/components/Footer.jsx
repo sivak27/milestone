@@ -27,7 +27,7 @@ export default function Footer() {
                 mixBlendMode: "multiply" /* Strips out white background elements instantly */
               }} 
             />
-            <h3>MileStone</h3>
+            <h3>MileStone Digital Marketing</h3>
           </div>
 
           <p style={{ marginTop: "16px" }}>
@@ -80,7 +80,7 @@ export default function Footer() {
       <div className="footer-bottom">
 
         <p>
-          © {new Date().getFullYear()} MileStone. All rights reserved.
+          © {new Date().getFullYear()} MileStone Digital Marketing. All rights reserved.
         </p>
 
         <span>

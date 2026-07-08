@@ -101,7 +101,7 @@ export default function Growth() {
         
         {/* --- SECTION HEADER --- */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-12 w-full">
-          <div style={{ paddingLeft: '15px', paddingTop: '10px' }}>
+          <div style={{ paddingLeft: '15px', paddingTop: '10px' ,paddingBottom: "20px"}}>
             <p className="text-[10px] uppercase tracking-[0.25em] font-semibold text-[#8A9590] mb-2">
               Live Performance
             </p>
@@ -122,7 +122,7 @@ export default function Growth() {
           <div className="lg:col-span-2 bg-white rounded-[32px] p-8 md:p-10 border border-[#ECEFEA] shadow-[0_20px_40px_rgba(0,0,0,0.01)] flex flex-col justify-between relative h-[440px]">
             
             <div className="w-full flex justify-between items-start">
-              <div style={{ paddingLeft: '15px', paddingTop: '10px' }} className="text-left">
+              <div style={{ paddingLeft: '20px', paddingTop: '20px', paddingBottom: '10px' }} className="text-left">
                 <p className="text-[13px] uppercase tracking-widest font-bold text-[#8A9590] mb-1">
                   Organic Traffic
                 </p>
@@ -186,7 +186,7 @@ export default function Growth() {
             
             {/* 2. ENGAGEMENT CARD (DARK) */}
             <div className="bg-[#0D1210] text-white rounded-[28px] p-8 flex flex-col justify-between h-[208px] relative shadow-sm">
-              <div style={{ marginLeft: '15px', paddingTop: '10px' }}>
+              <div style={{ marginLeft: '20px', paddingTop: '10px' }}>
                 <p className="text-[10px] uppercase tracking-widest font-bold text-[#6D7772] mb-1">
                   Engagement
                 </p>
@@ -224,8 +224,8 @@ export default function Growth() {
             </div>
 
             {/* 3. QUALIFIED LEADS CARD (LIGHT) */}
-            <div className="bg-white rounded-[28px] p-8 border border-[#ECEFEA] shadow-[0_25px_50px_-20px_rgba(0,0,0,0.02)] flex flex-col justify-between h-[208px] relative">
-              <div style={{ paddingLeft: '15px', paddingTop: '10px' }}>
+            <div className="bg-white rounded-[28px] p-8 border border-[#ECEFEA] shadow-[0_25px_50px_-20px_rgba(0,0,0,0.02)] flex flex-col justify-between h-[208px] relative paddingTop-[10px]">
+              <div style={{ paddingLeft: '20px', paddingTop: '15px' }}>
                 <p className="text-[10px] uppercase tracking-widest font-bold text-[#8A9590] mb-1">
                   Qualified Leads
                 </p>
