@@ -261,7 +261,7 @@ export default function HeroSection() {
           />
           <div style={{ display: "flex", flexDirection: "column" }}>
             <span style={{ fontWeight: 600, fontSize: "18px", color: "#0E1412", letterSpacing: "0.01em", lineHeight: 1 }}>MileStone</span>
-            <span style={{ fontSize: "8px", color: "#9ca3af", fontWeight: "700", letterSpacing: "0.22em", textTransform: "uppercase", marginTop: "5px", lineHeight: 1 }}>EST. 2026</span>
+            <span style={{ fontSize: "8px", color: "#9ca3af", fontWeight: "700", letterSpacing: "0.22em", textTransform: "uppercase", marginTop: "5px", lineHeight: 1 }}>Digital Marketing</span>
           </div>
         </div>
         
