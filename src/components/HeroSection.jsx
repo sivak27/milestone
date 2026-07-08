@@ -388,7 +388,7 @@ export default function HeroSection() {
             {[
               { num: "3.5+", label: "Years building" },
               { num: "15+", label: "Brands scaled" },
-              { num: "99%", label: "Client retention" },
+              { num: "90%", label: "Client retention" },
             ].map((stat) => (
               <div key={stat.label} style={{ display: "flex", flexDirection: "column" }}>
                 <div style={{ fontSize: "28px", fontWeight: 600, color: "#0E1412", letterSpacing: "-0.02em", lineHeight: 1 }}>{stat.num}</div>
@@ -398,7 +398,7 @@ export default function HeroSection() {
           </div>
         </motion.div>
 
-        {/* Right Side Visual Canvas Frame Layout (ADDED: responsive-cards-container class) */}
+        {/* Right Side Visual Canvas Frame Layout */}
         <motion.div 
           className="responsive-cards-container"
           style={{ 
@@ -478,7 +478,7 @@ export default function HeroSection() {
               </div>
               <div style={{ fontSize: "30px", fontWeight: 600, color: "#0E1412", letterSpacing: "-0.01em" }}>+60%</div>
               <div style={{ marginTop: "16px", height: "7px", borderRadius: "999px", backgroundColor: "#f4f4f5", overflow: "hidden" }}>
-                <div style={{ height: "100%", backgroundColor: "#0E1412", borderRadius: "9999px", width: "60%" }} />
+                <div style={{ height: "100%", backgroundColor: "#0E1412", borderRadius: "999px", width: "60%" }} />
               </div>
             </FloatingCard>
 
@@ -502,15 +502,13 @@ export default function HeroSection() {
           borderBottom: "1px solid rgba(14, 20, 18, 0.06)",
           padding: "32px 0",
           overflow: "hidden",
-          backgroundColor: "transparent", 
-          backdropFilter: "blur(8px)",
           marginTop: "25px",
           width: "100vw"
         }}
       >
         <div className="marquee-container-loop">
           {[...Array(3)].map((_, i) => (
-            <div key={i} style={{ display: "flex", gap: "6rem", alignItems: "center" }}>
+            <div key={i} style={{ display: "flex", gap: "7rem", alignItems: "center", padding: "20px 10px" }}>
               {[Logo1, Logo2, Logo3, Logo4, Logo5].map((logoSrc, j) => (
                 <img
                   key={j}
@@ -521,7 +519,8 @@ export default function HeroSection() {
                     filter: "none", 
                     opacity: 1,      
                     transition: "all 0.3s ease",
-                    boxSizing: "content-box"
+                    boxSizing: "content-box",
+                    mixBlendMode: "multiply" /* Knock out light/white backgrounds to keep them transparent */
                   }}
                 />
               ))}

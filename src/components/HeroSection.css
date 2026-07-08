@@ -112,7 +112,7 @@ body {
           }
 
           .marquee-container-loop img {
-            height: 120px !important;
+            height: 100px !important;
           }
         }
 /* UPDATED RESPONSIVE MOBILE SCALING & ABSOLUTE CENTERING ENGINE */
