@@ -25,15 +25,13 @@ const teamData = [
     role: "Design Director",
     company: "MileStone Digital Marketing",
     image: "https://i.pinimg.com/originals/fc/4b/77/fc4b77859b2b5fb842c43421dfa045f4.jpg",
-    socials: { linkedin: "#", github: "#", email: "mailto:goku@milestone.com" }
   },
   {
     id: 2,
     name: "NaMi",
     role: "Lead Frontend Engineer",
     company: "MileStone Digital Marketing",
-    image: "https://image.cdn2.seaart.me/2024-01-28/cmr9f25e878c7387vutg/aa3a270cff2005961953a5d358c3eb80ab66cfca_high.webp",
-    socials: { linkedin: "#", github: "#", email: "mailto:nami@milestone.com" }
+    image: "https://image.cdn2.seaart.me/2024-01-28/cmr9f25e878c7387vutg/aa3a270cff2005961953a5d358c3eb80ab66cfca_high.webp"
   },
   {
     id: 3,
@@ -41,7 +39,6 @@ const teamData = [
     role: "Head of Strategy",
     company: "MileStone Digital Marketing",
     image: "https://thfvnext.bing.com/th/id/OIP.ilowuWKtewHF40OGYanCVgHaHa?r=0&o=7&cb=thfvnextfalcon4rm=3&rs=1&pid=ImgDetMain&o=7&rm=3",
-    socials: { linkedin: "#", github: "#", email: "mailto:gojo@milestone.com" }
   },
   {
     id: 4,
@@ -49,7 +46,6 @@ const teamData = [
     role: "Senior Backend Engineer",
     company: "MileStone Digital Marketing",
     image: "https://www.pngplay.com/wp-content/uploads/12/Naruto-Kid-Transparent-File.png",
-    socials: { linkedin: "#", github: "#", email: "mailto:naruto@milestone.com" }
   }
 ];
 
@@ -146,18 +142,6 @@ const Team = () => {
                   <h3>{currentMember.name}</h3>
                   <span className="role">{currentMember.role}</span>
                   <span className="company">{currentMember.company}</span>
-                </div>
-
-                <div className="social-links">
-                  <a href={currentMember.socials.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn" className="social-icon">
-                    <LinkedinIcon size={20} />
-                  </a>
-                  <a href={currentMember.socials.github} target="_blank" rel="noreferrer" aria-label="GitHub" className="social-icon">
-                    <GithubIcon size={20} />
-                  </a>
-                  <a href={currentMember.socials.email} aria-label="Email" className="social-icon">
-                    <Mail size={20} />
-                  </a>
                 </div>
               </div>
 

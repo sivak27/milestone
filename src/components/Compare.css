@@ -181,3 +181,129 @@
     padding: 60px 0;
   }
 }
+
+
+
+
+/* ==========================================
+   MOBILE-ONLY RESPONSIVE OVERRIDES
+   ========================================== */
+@media (max-width: 900px) {
+  .compare {
+    padding: 60px 0;
+    overflow-x: hidden;
+  }
+
+  /* Fixed the missing dot typo and forced centering on mobile only */
+  .compare-container {
+    width: 90% !important;
+    margin: 0 auto !important; 
+  }
+
+  .compare-title {
+    margin-bottom: 36px;
+  }
+
+  .compare-header {
+    display: none; /* Hide wide table headers on mobile */
+  }
+
+  .compare-table-frame {
+    gap: 20px;
+  }
+
+  .floating-row-card {
+    grid-template-columns: 1fr; /* Stack elements downwards */
+    gap: 0;
+    border-radius: 16px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  }
+
+  /* --- SAFE MOBILE HOVER / TOUCH ANIMATIONS --- */
+  /* This triggers your red/green glows instantly when a mobile user taps the card */
+  .floating-row-card:active {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgba(14,20,18,0.06);
+    border-color: #d1d1cb;
+  }
+
+  .floating-row-card:active .freelancer-cell-target {
+    background-color: rgba(254, 242, 242, 0.75); /* Smooth Red Glow on press */
+    color: #991b1b;
+  }
+
+  .floating-row-card:active .freelancer-cell-target svg {
+    color: #ef4444;
+  }
+
+  .floating-row-card:active .partner-cell-target {
+    background-color: rgba(223, 245, 231, 0.5); /* Rich Green Glow on press */
+    color: #065f46;
+  }
+
+  /* Internal card structure fixes for small screens */
+  .compare-label {
+    padding: 20px 20px 12px 20px;
+    font-size: 1.3rem;
+    background-color: #fbfcfb; 
+    border-bottom: 1px solid #f4f4f2;
+  }
+
+  .compare-cell {
+    padding: 18px 20px;
+    border-left: none;
+    border-bottom: 1px solid #f4f4f2;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+
+  .compare-cell:last-child {
+    border-bottom: none;
+  }
+
+  /* Injects mobile-friendly column labels so users know who is who */
+  .freelancer-cell-target::before {
+    content: "Typical Freelancer";
+    display: block;
+    font-family: "Inter", sans-serif;
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #a3a3a3;
+    margin-bottom: 4px;
+  }
+
+  .partner-cell-target::before {
+    content: "MileStone Digital Marketing";
+    display: block;
+    font-family: "Inter", sans-serif;
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #10b981;
+    margin-bottom: 4px;
+  }
+
+  /* Standardizes icons and text positions under the new labels */
+  .compare-cell span {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    width: 100%;
+  }
+}
+
+/* Extra optimization safety layer for extra narrow mobile screens (< 400px) */
+@media (max-width: 400px) {
+  .compare-container {
+    width: 92% !important;
+  }
+  .compare-label, 
+  .compare-cell {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+}
