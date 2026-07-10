@@ -511,8 +511,6 @@ export default function HeroSection() {
       <div 
         style={{
           position: "relative",
-          borderTop: "1px solid rgba(14, 20, 18, 0.06)",
-          borderBottom: "1px solid rgba(14, 20, 18, 0.06)",
           padding: "32px 0",
           overflow: "hidden",
           marginTop: "25px",
