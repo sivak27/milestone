@@ -433,7 +433,7 @@ export default function HeroSection() {
               <div style={{ position: "absolute", inset: "170px", borderRadius: "50%", border: "1px solid rgba(75, 85, 99, 0.08)" }} />
               
               <div className="animate-orbit-custom-cw" style={{ position: "absolute", inset: 0 }}>
-                <span style={{ position: "absolute", top: 0, left: "50%", transform: "translate(-50%, -50%)", width: "12px", height: "12px", borderRadius: "50%", backgroundColor: "#4b5563", boxShadow: "0 2px 8px rgba(75, 85, 99, 0.25)" }} />
+                <span style={{ position: "absolute", top: 0, left: "50%", transform: "translate(-50%, -50%)", width: "12px", height: "12px", borderRadius: "50%", backgroundColor: "#10b981", boxShadow: "0 2px 8px rgba(75, 85, 99, 0.25)" }} />
               </div>
               <div className="animate-orbit-custom-ccw" style={{ position: "absolute", inset: "85px" }}>
                 <span style={{ position: "absolute", top: 0, left: "50%", transform: "translate(-50%, -50%)", width: "8px", height: "8px", borderRadius: "50%", backgroundColor: "#6b7280" }} />
@@ -514,7 +514,9 @@ export default function HeroSection() {
           padding: "32px 0",
           overflow: "hidden",
           marginTop: "25px",
-          width: "100vw"
+          width: "100vw",
+          backgroundColor: "rgba(255, 255, 255, 0.4)",
+          backdropFilter: "blur(8px)"
         }}
       >
         <div className="marquee-container-loop">
